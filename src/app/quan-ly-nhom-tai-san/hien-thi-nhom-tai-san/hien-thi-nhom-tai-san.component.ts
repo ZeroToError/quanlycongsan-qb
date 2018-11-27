@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NhomTaiSanService} from '../../_services/nhom-tai-san.service';
+import {NhomTaiSan} from '../../_models/nhom-tai-san';
 
 @Component({
   selector: 'app-hien-thi-nhom-tai-san',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hien-thi-nhom-tai-san.component.scss']
 })
 export class HienThiNhomTaiSanComponent implements OnInit {
+  nhomTaiSan: NhomTaiSan[];
 
-  constructor() { }
+  constructor(private nhomTaiSanService: NhomTaiSanService) {
+    this.nhomTaiSan = [];
+  }
 
   ngOnInit() {
+    this.nhomTaiSanService.getAll().subscribe(
+        result => {
+          this.nhomTaiSan = result;
+        },
+        error => {
+
+        }
+    )
   }
 
 }
