@@ -1,0 +1,12 @@
+.main-content {
+    background: url('assets/img/bg5.jpg') center no-repeat;
+    height: 100vh;
+
+    /* Center and scale the image nicely */
+    background-size: cover;
+}
+
+.form-login {
+    margin-top: 20vh;
+    opacity: 0.95;
+}
