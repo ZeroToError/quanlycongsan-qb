@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
   }
 
   isValidated(): boolean {
-    return this.loginModel.username !== '' && this.loginModel.password !== '';
+    return this.isNotEmptyString(this.loginModel.username) && this.isNotEmptyString(this.loginModel.password);
+  }
+
+  private isNotEmptyString(text: String) {
+    return text !== undefined && text !== null && text !== '';
   }
 }
