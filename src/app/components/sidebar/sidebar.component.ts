@@ -87,21 +87,24 @@ export const MENUS: ParentMenu[] = [
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-    menuItems: any[];
+
+  menuItems: any[];
     itemsParentMenu: ParentMenu[];
+    userName: string;
 
-    constructor() {
-    }
+  constructor() {
+      this.userName = '';
+  }
 
-    ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.itemsParentMenu = MENUS.filter(value => value);
-    }
-
-    isMobileMenu() {
-        if (window.innerWidth > 991) {
-            return false;
-        }
-        return true;
-    };
+  ngOnInit() {
+    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.itemsParentMenu = MENUS.filter(value => value);
+    this.userName = localStorage.getItem('username');
+  }
+  isMobileMenu() {
+      if ( window.innerWidth > 991) {
+          return false;
+      }
+      return true;
+  };
 }

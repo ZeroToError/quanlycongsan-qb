@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TaiSan} from '../../_models/tai-san';
+import {TaiSanService} from '../../_services/tai-san.service';
 
 @Component({
   selector: 'app-hien-thi-tai-san',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HienThiTaiSanComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  taiSans: TaiSan[]
+  constructor(private taiSanService: TaiSanService) {
+    this.taiSans = [];
   }
 
+  ngOnInit() {
+    this.taiSanService.getAll().subscribe(
+        result => {
+          this.taiSans = result;
+        }, error2 => {
+          alert('Lỗi');
+        }
+    )
+  }
 }
