@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
           this.sidebarVisible = false;
     }
 
-    ngOnInit(){
+    ngOnInit() {
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -138,15 +138,15 @@ export class NavbarComponent implements OnInit {
         }
     };
 
-    getTitle(){
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 2 );
+    getTitle() {
+      let titlee = this.location.prepareExternalUrl(this.location.path());
+      if (titlee.charAt(0) === '#') {
+          titlee = titlee.slice(1);
       }
-      titlee = titlee.split('/').pop();
 
-      for(var item = 0; item < this.listTitles.length; item++){
-          if(this.listTitles[item].path === titlee){
+      for (let item = 0; item < this.listTitles.length; item++) {
+          if (this.listTitles[item].path === titlee) {
+              console.log('title: ', this.listTitles[item].title);
               return this.listTitles[item].title;
           }
       }

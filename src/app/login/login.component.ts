@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {LoginModel} from '../_models/login-model';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,19 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  loginModel: LoginModel
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.loginModel = new LoginModel();
   }
 
   login() {
-    localStorage.setItem('username', 'admin');
+    localStorage.setItem('username', this.loginModel.username);
     this.router.navigate(['']);
+  }
+
+  isValidated(): boolean {
+    return this.loginModel.username !== '' && this.loginModel.password !== '';
   }
 }

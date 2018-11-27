@@ -44,11 +44,15 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+    userName: string;
 
-  constructor() { }
+  constructor() {
+      this.userName = '';
+  }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.userName = localStorage.getItem('username');
   }
   isMobileMenu() {
       if ( window.innerWidth > 991) {
