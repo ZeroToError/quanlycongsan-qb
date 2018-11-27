@@ -34,7 +34,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'them-nhom-tai-san',      component: ThemNhomTaiSanComponent },
     { path: 'sua-nhom-tai-san',      component: SuaNhomTaiSanComponent },
     { path: 'hien-thi-ke-hoach',      component: HienThiKeHoachComponent },
-    { path: 'them-thi-ke-hoach',      component: ThemKeHoachComponent },
+    { path: 'them-ke-hoach',      component: ThemKeHoachComponent },
     { path: 'hien-thi-de-xuat', component: HienThiDeXuatComponent },
     { path: 'them-de-xuat',     component: ThemDeXuatComponent },
     { path: 'thong-ke',             component: ThongKeComponent },
