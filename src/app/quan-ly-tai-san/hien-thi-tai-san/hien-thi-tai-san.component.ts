@@ -35,14 +35,14 @@ export class HienThiTaiSanComponent implements OnInit {
 
     setPage(page: number) {
         // get pager object from service
-        this.pager = this.pageService.getPager(this.taiSans.length, page);
+        this.pager = this.pageService.getPager(this.taiSans.length, page, this.itemPerPage);
 
         // get current page of items
         this.pagedItems = this.taiSans.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
-    setItemPerPage(itemPP: number) {
-      this.itemPerPage = itemPP;
+    setItemPerPage(value: any) {
+      this.itemPerPage = value;
       this.setPage(1);
     }
 }

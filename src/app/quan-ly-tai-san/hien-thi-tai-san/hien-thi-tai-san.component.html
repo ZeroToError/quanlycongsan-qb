@@ -73,10 +73,10 @@
             <div class="col-md-6 pr-1">
               <div class="form-group">
                 <label>Hiển thị</label>
-                <select class="form-control page-link bg-light" style="max-width: 100px">
-                  <option (click)="setItemPerPage(5)">5</option>
-                  <option (click)="setItemPerPage(10)">10</option>
-                  <option (click)="setItemPerPage(15)">15</option>
+                <select class="form-control page-link bg-light" style="max-width: 100px" (change)="setItemPerPage($event.target.value)">
+                  <option value=5 >5</option>
+                  <option value=10>10</option>
+                  <option value=15>15</option>
                 </select>
               </div>
             </div>
@@ -123,7 +123,7 @@
               <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
               <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
             <!--</ul>-->
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-lg justify-content-end">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination justify-content-end">
               <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
                 <a (click)="setPage(1)" class="page-link">First</a>
               </li>
