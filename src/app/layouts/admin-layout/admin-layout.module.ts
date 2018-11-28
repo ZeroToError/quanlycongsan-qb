@@ -32,7 +32,6 @@ import {ThemDeXuatComponent} from '../../quan-ly-de-xuat/them-de-xuat/them-de-xu
     FormsModule,
     ChartsModule,
     NgbModule,
-    ToastrModule.forRoot(),
       FormsModule
   ],
   declarations: [
