@@ -69,6 +69,18 @@
         <div class="card-header">
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Hiển thị</label>
+                <select class="form-control page-link bg-light" style="max-width: 100px">
+                  <option (click)="setItemPerPage(5)">5</option>
+                  <option (click)="setItemPerPage(10)">10</option>
+                  <option (click)="setItemPerPage(15)">15</option>
+                </select>
+              </div>
+            </div>
+          </div>
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
@@ -83,15 +95,15 @@
                 <th>Action</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taisan of taiSans">
-                  <td>{{taisan.maTaiSan}}</td>
-                  <td>{{taisan.loaiTaiSan}}</td>
-                  <td>{{taisan.nhomTaiSan}}</td>
-                  <td>{{taisan.donViTinh}}</td>
-                  <td>{{taisan.maThietBi}}</td>
-                  <td>{{taisan.namSuDung}}</td>
-                  <td>{{taisan.tenTaiSan}}</td>
-                  <td>{{taisan.thongSoKyThuat}}</td>
+                <tr *ngFor="let taiSan of pagedItems">
+                  <td>{{taiSan.maTaiSan}}</td>
+                  <td>{{taiSan.loaiTaiSan}}</td>
+                  <td>{{taiSan.nhomTaiSan}}</td>
+                  <td>{{taiSan.donViTinh}}</td>
+                  <td>{{taiSan.maThietBi}}</td>
+                  <td>{{taiSan.namSuDung | date}}</td>
+                  <td>{{taiSan.tenTaiSan}}</td>
+                  <td>{{taiSan.thongSoKyThuat}}</td>
                   <td>
                     <button class="btn btn-md btn-primary"><i class="now-ui-icons travel_info"></i></button>
                     <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i></button>
@@ -101,6 +113,34 @@
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="card-footer">
+          <nav aria-label="Page navigation">
+            <!--<ul class="pagination pagination-lg justify-content-end">-->
+              <!--<li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+              <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+              <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+              <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+              <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+            <!--</ul>-->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination-lg justify-content-end">
+              <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                <a (click)="setPage(1)" class="page-link">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+                <a (click)="setPage(page)" class="page-link">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
