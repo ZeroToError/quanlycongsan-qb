@@ -95,7 +95,7 @@
                 <th>Action</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taiSan of pagedItems">
+                <tr *ngFor="let taiSan of taiSans">
                   <td>{{taiSan.maTaiSan}}</td>
                   <td>{{taiSan.loaiTaiSan}}</td>
                   <td>{{taiSan.nhomTaiSan}}</td>
@@ -116,29 +116,12 @@
         </div>
         <div class="card-footer">
           <nav aria-label="Page navigation">
-            <!--<ul class="pagination pagination-lg justify-content-end">-->
-              <!--<li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-              <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
-            <!--</ul>-->
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination pagination justify-content-end">
-              <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-                <a (click)="setPage(1)" class="page-link">First</a>
-              </li>
-              <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-                <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
-              </li>
-              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
-                <a (click)="setPage(page)" class="page-link">{{page}}</a>
-              </li>
-              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-                <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
-              </li>
-              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-                <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
-              </li>
+            <ul class="pagination pagination-lg justify-content-end">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
           </nav>
         </div>
