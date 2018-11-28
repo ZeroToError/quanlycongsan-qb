@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import {AuthGuard} from './auth.guard';
+import {HttpClientModule} from '@angular/common/http';
+import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {AuthGuard} from './auth.guard';
     RouterModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-      FormsModule
+      FormsModule,
+      HttpClientModule,
+      ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
