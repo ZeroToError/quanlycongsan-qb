@@ -15,13 +15,14 @@ export class HienThiNhomTaiSanComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.nhomTaiSanService.getAll().subscribe(
-        result => {
-          this.nhomTaiSan = result;
-        },
-        error => {
-
-        }
+      this.nhomTaiSanService.getAll().subscribe(
+          result => {
+              this.nhomTaiSan = result.result;
+          },
+          error2 => {
+              alert('Get nhom tai san error !!')
+          }
+      )
     )
   }
 
