@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThemTaiSanComponent implements OnInit {
 
+  soluong: number;
   constructor() { }
 
   ngOnInit() {
+    this.soluong = 0;
   }
 
+    arrayOne(): any[] {
+        return Array(this.soluong);
+    }
+
+    remove() {
+    if(this.soluong > 0) {
+        this.soluong--;
+    }
+    }
 }
