@@ -23,7 +23,6 @@ export class HienThiNhomTaiSanComponent implements OnInit {
               alert('Get nhom tai san error !!')
           }
       )
-    )
   }
 
 }
