@@ -69,6 +69,18 @@
         <div class="card-header">
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Hiển thị</label>
+                <select class="form-control page-link bg-light" style="max-width: 100px" (change)="setItemPerPage($event.target.value)">
+                  <option value=5 [selected]="5 === size">5</option>
+                  <option value=10 [selected]="10 === size">10</option>
+                  <option value=15 [selected]="15 === size">15</option>
+                </select>
+              </div>
+            </div>
+          </div>
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
@@ -83,15 +95,15 @@
                 <th>Action</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taisan of taiSans">
-                  <td>{{taisan.maTaiSan}}</td>
-                  <td>{{taisan.loaiTaiSan}}</td>
-                  <td>{{taisan.nhomTaiSan}}</td>
-                  <td>{{taisan.donViTinh}}</td>
-                  <td>{{taisan.maThietBi}}</td>
-                  <td>{{taisan.namSuDung}}</td>
-                  <td>{{taisan.tenTaiSan}}</td>
-                  <td>{{taisan.thongSoKyThuat}}</td>
+                <tr *ngFor="let taiSan of taiSans">
+                  <td>{{taiSan.maTaiSan}}</td>
+                  <td>{{taiSan.loaiTaiSan}}</td>
+                  <td>{{taiSan.nhomTaiSan}}</td>
+                  <td>{{taiSan.donViTinh}}</td>
+                  <td>{{taiSan.maThietBi}}</td>
+                  <td>{{taiSan.namSuDung | date}}</td>
+                  <td>{{taiSan.tenTaiSan}}</td>
+                  <td>{{taiSan.thongSoKyThuat}}</td>
                   <td>
                     <button class="btn btn-md btn-primary"><i class="now-ui-icons travel_info"></i></button>
                     <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i></button>
@@ -101,6 +113,15 @@
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="card-footer">
+          <nav aria-label="Page navigation">
+            <ul class="pagination pagination-lg justify-content-end">
+              <li class="page-item"><button class="page-link" (click)="previousPage()" [disabled]="page === 0" [class.pag-disable]="page === 0">Previous</button></li>
+              <li class="page-item" *ngFor="let item of arrayOne(); let index = index "><button class="page-link" (click)="changePage(index+1)" [disabled]="page === index" [class.pag-active]="page === index">{{index + 1}}</button></li>
+              <li class="page-item"><button class="page-link" (click)="nextPage()" [disabled]="page === totalPage - 1" [class.pag-disable]="page === totalPage - 1">Next</button></li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

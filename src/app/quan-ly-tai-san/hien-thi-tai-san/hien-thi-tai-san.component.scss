@@ -18,3 +18,13 @@ option {
   display: flex;
   flex-flow: row-reverse;
 }
+
+.pag-active {
+  color: white;
+  background: lightblue;
+}
+
+.pag-disable {
+  color: white;
+  background: lightgray;
+}
