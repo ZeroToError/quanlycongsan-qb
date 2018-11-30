@@ -1,5 +1,152 @@
-<div class="panel-header">
-  <div class="header text-center">
-    <h2 class="title">Thêm tài sản</h2>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Thông tin tài sản</h4>
+        </div>
+        <div class="card-body">
+          <form *ngIf="1===1">
+            <div class="row">
+              <div class="col-md-1 pr-1"></div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Tên hoặc mã tài sản</label>
+                  <input type="text" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-1 pl-1"></div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Nhóm tài sản</label>
+                  <select class="form-control">
+                    <option>Item 1</option>
+                    <option>Item 2</option>
+                    <option>Item 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Mã tài sản</label>
+                  <select class="form-control">
+                    <option>Item 1</option>
+                    <option>Item 2</option>
+                    <option>Item 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Số lượng</label>
+                  <input type="number" [min]="0" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc." [(ngModel)]="soluong" name="soLuong">
+                </div>
+                <div class="form-group">
+                  <label>Phòng ban</label>
+                  <select class="form-control">
+                    <option>Item 1</option>
+                    <option>Item 2</option>
+                    <option>Item 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Ngày sử dụng</label>
+                  <input type="date" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+
+                </div>
+                <div class="form-group">
+                  <label>Tên nhà sản xuất</label>
+                  <input type="text" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+                </div>
+                <div class="form-group">
+                  <label>Số hiệu model</label>
+                  <input type="text" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+
+                </div>
+              </div>
+              <div class="col-md-2 pl-1"></div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Loại tài sản</label>
+                  <select class="form-control">
+                    <option>Item 1</option>
+                    <option>Item 2</option>
+                    <option>Item 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Mã tài sản</label>
+                  <input type="text" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+                </div>
+                <div class="form-group">
+                  <label>Số tiền</label>
+                  <input type="number" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+
+                </div>
+                <div class="form-group">
+                  <label>Người sử dụng</label>
+                  <input type="text" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+                </div>
+                <div class="form-group">
+                  <label>Đơn vị tính</label>
+                  <select class="form-control">
+                    <option>Item 1</option>
+                    <option>Item 2</option>
+                    <option>Item 3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Năm sản xuất</label>
+                  <input type="number" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+                </div>
+                <div class="form-group">
+                  <label>Thông số kỹ thuật</label>
+                 <textarea class="form-control"></textarea>
+                </div>
+              </div>
+              <div class="col-md-1 pl-1"></div>
+            </div>
+          </form>
+
+          <div class="card-header">
+            <h5>Thông tin chi tiết</h5>
+          </div>
+          <div *ngIf="1===1" class="table-responsive">
+            <table class="table" contenteditable="true">
+              <thead class=" text-primary">
+                <th>#</th>
+                <th>Mã tài sản</th>
+                <th>Số seri</th>
+                <th>Đặc điểm riêng</th>
+                <th>Action</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let x of arrayOne(); let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{'TSS-0'+ i}} </td>
+                <td>{{'SR-0' + i}} </td>
+                <td>{{'Đặc điểm' + i}} </td>
+                <td>
+                  <button class="btn btn-md btn-warning" (click)="remove()"><i class="now-ui-icons ui-1_simple-delete"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 pr-1" style="display: flex; flex-flow: row-reverse">
+              <div class="form-group group-function">
+                <button class="btn btn-lg btn-primary mr-1">Hủy bỏ</button>
+                <button class="btn btn-lg btn-info">Lưu</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>

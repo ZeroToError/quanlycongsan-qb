@@ -12,4 +12,11 @@ export class SuaNhomTaiSanComponent implements OnInit {
   ngOnInit() {
   }
 
+    isValidated(): boolean {
+        return this.isNotEmptyString('a') && this.isNotEmptyString('a');
+    }
+
+    private isNotEmptyString(text: String) {
+        return text !== undefined && text !== null && text !== '';
+    }
 }
