@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import {TaiSan} from '../_models/tai-san';
 import {of} from 'rxjs/index';
 import {Observable} from 'rxjs/Rx';
-import {forEach} from '@angular/router/src/utils/collection';
-import index from '@angular/cli/lib/cli';
+import {HttpClient} from '@angular/common/http';
+import {API_URL} from '../_constants/constants';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaiSanService {
-
+    private taiSanUrl =  API_URL +  '/taisans';
     taiSans: TaiSan[];
 
 
-    constructor() {
+    constructor(private http: HttpClient) {
         this.taiSans = [
             {
                 id: 1,
@@ -717,9 +718,15 @@ export class TaiSanService {
         return of(
             {
                 result: result,
-                total: this.taiSans.length
+                totals: this.taiSans.length
             }
 
         );
+    }
+
+
+    getAllFromApi(page: number, size: number): Observable<any> {
+        const url = `${this.taiSanUrl}/?offset=${page}&limit=${size}`;
+        return this.http.get(url);
     }
 }

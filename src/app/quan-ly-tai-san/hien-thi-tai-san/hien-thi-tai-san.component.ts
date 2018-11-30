@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {TaiSan} from '../../_models/tai-san';
 import {TaiSanService} from '../../_services/tai-san.service';
 
@@ -33,15 +33,35 @@ export class HienThiTaiSanComponent implements OnInit {
     }
 
     getTaiSans() {
-        this.taiSanService.getAll(this.page, this.size).subscribe(
-            result => {
-                this.taiSans = result['result'];
-                this.total = result['total'];
-                this.totalPage =  Math.ceil(this.total / this.size) ;
-            }, error2 => {
-                alert('Lỗi');
-            }
-        )
+        if (isDevMode()) {
+            this.taiSanService.getAllFromApi(this.page, this.size).subscribe(
+                result => {
+                    if (result['errorCode'] === 0) {
+                        this.taiSans = result['result']['items'];
+                        this.total = result['result']['totals'];
+                        this.totalPage =  Math.ceil(this.total / this.size) ;
+                    } else {
+                        alert('lỗi');
+                    }
+                }, error2 => {
+                    alert('Lỗi');
+                }
+            );
+        } else {
+            this.taiSanService.getAll(this.page, this.size).subscribe(
+                result => {
+                    if (result['errorCode'] === undefined) {
+                        this.taiSans = result['result'];
+                        this.total = result['totals'];
+                        this.totalPage =  Math.ceil(this.total / this.size) ;
+                    } else {
+                        alert('lỗi');
+                    }
+                }, error2 => {
+                    alert('Lỗi');
+                }
+            );
+        }
     }
 
     arrayOne(): any[] {
