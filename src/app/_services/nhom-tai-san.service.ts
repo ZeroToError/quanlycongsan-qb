@@ -21,9 +21,6 @@ export class NhomTaiSanService {
         );
     }
 
-    getNhomTaiSanById(id: number): Observable<NhomTaiSan>{
-
-    }
 
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
