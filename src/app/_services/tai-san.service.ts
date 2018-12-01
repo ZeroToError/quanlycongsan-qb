@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import {TaiSan} from '../_models/tai-san';
 import {of} from 'rxjs/index';
 import {Observable} from 'rxjs/Rx';
-import {HttpClient} from '@angular/common/http';
-import {API_URL} from '../_constants/constants';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {API_URL, httpOptions} from '../_constants/constants';
 import index from '@angular/cli/lib/cli';
+
+
+
 
 
 @Injectable({
@@ -54,7 +57,7 @@ export class TaiSanService {
 
 
     getAllFromApi(page: number, size: number): Observable<any> {
-        const url = `${this.taiSanUrl}/?offset=${page}&limit=${size}`;
+        const url = `${this.taiSanUrl}?offset=${page}&limit=${size}`;
         return this.http.get(url);
     }
 }

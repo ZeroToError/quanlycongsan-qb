@@ -13,54 +13,48 @@
               <div class="col-md-5 pr-1">
                 <div class="form-group">
                   <label>Tên hoặc mã tài sản</label>
-                  <input type="text" class="form-control" placeholder="Tên hoặc mã" value="Creative Code Inc.">
+                  <input type="text" class="form-control" name="tenTaiSan" value="" [(ngModel)]="searchFilter.tenTaiSan">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Đơn vị</label>
+                  <select class="form-control" name="donVi" (change)="updateSelectedDonVi($event.target.value)">
+                    <option value="">--</option>
+                    <option *ngFor="let item of donVis" [value]="item.id">{{item.ten}}</option>
+                  </select>
+                </div>
                 <div class="form-group">
                   <label>Phòng ban</label>
-                  <select class="form-control">
-                    <option>Item 1</option>
-                    <option>Item 2</option>
-                    <option>Item 3</option>
+                  <select class="form-control" name="phongBan" [(ngModel)]="searchFilter.phongBan">
+                    <option value="">--</option>
+                    <option *ngFor="let item of selectedDonVi.child" value="{{item.id}}">{{item.ten}}</option>
                   </select>
                 </div>
               </div>
-              <div class="col-md-6 pl-1">
-                <div class="form-group">
-                  <label>Nhóm tài sản</label>
-                  <select class="form-control">
-                    <option>Item 1</option>
-                    <option>Item 2</option>
-                    <option>Item 3</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row">
+
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Loại tài sản</label>
-                  <select class="form-control">
-                    <option>Item 1</option>
-                    <option>Item 2</option>
-                    <option>Item 3</option>
+                  <label>Nhóm tài sản</label>
+                  <select class="form-control" name="nhomTaiSan" [(ngModel)]="searchFilter.nhomTaiSan">
+                    <option value="">--</option>
+                    <option *ngFor="let item of nhomTaiSans" value="{{item.ten}}">{{item.ten}}</option>
                   </select>
                 </div>
-              </div>
-              <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Trạng thái</label>
-                  <select class="form-control">
-                    <option>Item 1</option>
-                    <option>Item 2</option>
-                    <option>Item 3</option>
+                  <label>Loại tài sản</label>
+                  <select class="form-control" name="loaiTaiSan" [(ngModel)]="searchFilter.loaiTaiSan">
+                    <option value="">--</option>
+                    <option *ngFor="let item of loaiTaiSans" value="{{item.ten}}">{{item.ten}}</option>
                   </select>
                 </div>
               </div>
+
             </div>
+
+
             <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-6 pr-1">
@@ -94,7 +88,7 @@
             </div>
             <div class="col-md-6 pr-1 flex-column-reverse">
               <div class="form-group">
-                <button class="btn btn btn-lg btn-success float-right" routerLink="/them-tai-san">Thêm mới</button>
+                <button class="btn btn btn-lg btn-success float-right" routerLink="/tai-san/them-tai-san">Thêm mới</button>
               </div>
             </div>
           </div>
@@ -113,7 +107,7 @@
                 <th>Action</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taiSan of taiSans">
+                <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan}">
                   <td>{{taiSan.maTaiSan}}</td>
                   <td>{{taiSan.loaiTaiSan}}</td>
                   <td>{{taiSan.nhomTaiSan}}</td>
