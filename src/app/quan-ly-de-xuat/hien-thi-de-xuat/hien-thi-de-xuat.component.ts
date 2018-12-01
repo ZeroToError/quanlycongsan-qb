@@ -27,24 +27,6 @@ export class HienThiDeXuatComponent implements OnInit {
               lyDo: 'lý do 1',
               ngayHoanThanh: Date.now(),
               trangThai: 1
-          },
-          {
-              loaiDeXuat: 'Mua tài sản',
-              tenPhongBan: 'Phong ban 1',
-              tenDeXuat: 'Đề xuất 1',
-              nam: 2018,
-              lyDo: 'lý do 1',
-              ngayHoanThanh: Date.now(),
-              trangThai: 1
-          },
-          {
-              loaiDeXuat: 'Mua tài sản',
-              tenPhongBan: 'Phong ban 1',
-              tenDeXuat: 'Đề xuất 1',
-              nam: 2018,
-              lyDo: 'lý do 1',
-              ngayHoanThanh: Date.now(),
-              trangThai: 1
           }
       ]
   }
