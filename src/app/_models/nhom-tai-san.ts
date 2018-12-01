@@ -1,5 +1,4 @@
-export class NhomTaiSan {
-    id: number;
-    ten: string;
-    ma: string;
+import {Library} from './library';
+
+export class NhomTaiSan extends Library {
 }
