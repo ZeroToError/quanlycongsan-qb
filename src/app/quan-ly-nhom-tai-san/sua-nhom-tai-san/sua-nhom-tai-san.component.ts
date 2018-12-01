@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NhomTaiSanService} from '../../_services/nhom-tai-san.service';
 import {NhomTaiSan} from '../../_models/nhom-tai-san';
-import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -11,11 +10,16 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SuaNhomTaiSanComponent implements OnInit {
 
-  constructor() { }
+    nhomTaiSan: NhomTaiSan;
+
+  constructor(private nhomTaiSanService: NhomTaiSanService) {
+
+  }
 
 
 
   ngOnInit() {
+    this.nhomTaiSan = this.nhomTaiSanService.getNhomTaiKhoan();
   }
 
     isValidated(): boolean {
