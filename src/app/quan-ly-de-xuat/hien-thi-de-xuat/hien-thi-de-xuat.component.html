@@ -75,18 +75,19 @@
               <th>Lý do</th>
               <th>Ngày hoàn thành</th>
               <th>Trạng thái</th>
+              <th>Action</th>
               </thead>
               <tbody>
-              <tr *ngFor="let taiSan of taiSans">
-                <td>{{taiSan.maTaiSan}}</td>
-                <td>{{taiSan.loaiTaiSan}}</td>
-                <td>{{taiSan.nhomTaiSan}}</td>
-                <td>{{taiSan.donViTinh}}</td>
-                <td>{{taiSan.maThietBi}}</td>
-                <td>{{taiSan.namSuDung | date}}</td>
-                <td>{{taiSan.tenTaiSan}}</td>
-                <td>{{taiSan.thongSoKyThuat}}</td>
-                <td>{{taiSan.soluong}}</td>
+              <tr *ngFor="let deXuat of deXuats">
+                <td>{{deXuat.loaiDeXuat}}</td>
+                <td>{{deXuat.tenPhongBan}}</td>
+                <td>{{deXuat.tenDeXuat}}</td>
+                <td>{{deXuat.nam}}</td>
+                <td>{{deXuat.lyDo}}</td>
+                <td>{{deXuat.ngayHoanThanh | date}}</td>
+                <td>{{deXuat.trangThai}}</td>
+
+
                 <td>
                   <button class="btn btn-md btn-primary"><i class="now-ui-icons travel_info"></i></button>
                   <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i></button>
