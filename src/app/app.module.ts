@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuard} from './auth.guard';
 import {HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr';
+import { TaisanPipe } from './_pipes/taisan.pipe';
 
 
 @NgModule({
@@ -27,7 +28,6 @@ import {ToastrModule} from 'ngx-toastr';
     RouterModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-      FormsModule,
       HttpClientModule,
       ToastrModule.forRoot()
   ],

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Rx';
 import {catchError, tap} from 'rxjs/internal/operators';
 import {of} from 'rxjs/index';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {API_URL} from '../_constants/constants';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 export class LoginService {
 
-  private loginUrl = 'http://103.95.197.121:9000/api/account/login';
+  private loginUrl =  API_URL +  '/account/login';
   constructor(private http: HttpClient) { }
 
 

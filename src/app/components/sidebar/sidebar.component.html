@@ -10,32 +10,32 @@
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">
-        <li routerLinkActive="active"
-            class="{{menuItems[0].class}} nav-item">
-            <a [routerLink]="[menuItems[0].path]">
-                <i class="now-ui-icons {{menuItems[0].icon}}"></i>
-                <p>{{menuItems[0].title}}</p>
-            </a>
-        </li>
-        <li *ngFor="let item of itemsParentMenu"
+        <li *ngFor="let item of menuItems"
             routerLinkActive="active"
             class="{{item.class}} nav-item"
-            [class.active]="item.toggle"
         >
-            <a (click)="item.toggle = !(item.toggle)">
+            <a (click)="resetCollapsible()"
+               [routerLink]="item.path"
+               *ngIf="(item.isParent && !item.isHasChild); else elseBlock">
                 <i class="now-ui-icons {{item.icon}}"></i>
                 <p>{{item.title}}</p>
             </a>
-            <ul class="nav child-menu" *ngIf="item.itemsMenu" [class.hidden]="!item.toggle">
-                <li *ngFor="let childMenu of item.itemsMenu"
-                    routerLinkActive="active"
-                    class="{{childMenu.class}} nav-item">
-                    <a [routerLink]="[childMenu.path]">
-                        <i class="now-ui-icons {{childMenu.icon}}"></i>
-                        <p>{{childMenu.title}}</p>
-                    </a>
-                </li>
-            </ul>
+            <ng-template #elseBlock>
+                <a (click)="item.isCollapsible = !item.isCollapsible">
+                    <i class="now-ui-icons {{item.icon}}"></i>
+                    <p>{{item.title}}</p>
+                </a>
+                <ul class="nav child-menu" *ngIf="item.isHasChild && item.child.length" [hidden]="!item.isCollapsible">
+                    <li *ngFor="let childMenu of item.child"
+                        routerLinkActive="active"
+                        class="{{childMenu.class}} nav-item">
+                        <a [routerLink]="[childMenu.path]">
+                            <i class="now-ui-icons {{childMenu.icon}}"></i>
+                            <p>{{childMenu.title}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </ng-template>
         </li>
     </ul>
 </div>
