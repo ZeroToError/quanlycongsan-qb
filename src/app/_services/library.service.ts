@@ -6,6 +6,8 @@ import {NhomTaiSan} from '../_models/nhom-tai-san';
 import {LoaiTaiSan} from '../_models/loai-tai-san';
 import {DonViTinh} from '../_models/don-vi-tinh';
 import {DonVi} from '../_models/don-vi';
+import {LoaiKeHoach} from '../_models/loai-ke-hoach';
+import {PhongBan} from '../_models/phong-ban';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +32,14 @@ export class LibraryService {
     getDonVisVaPhongBans(): Observable<DonVi[]> {
         return this.http.get<DonVi[]>(this.libraryUrl + '?type=donvivaphongban');
     }
+
+    getLoaiKeHoachs(): Observable<LoaiKeHoach[]> {
+        return this.http.get<LoaiKeHoach[]>(this.libraryUrl + '?type=loaikehoach');
+    }
+
+    getPhongBans(): Observable<PhongBan[]> {
+        return this.http.get<PhongBan[]>(this.libraryUrl + '?type=phongban');
+    }
+
+
 }

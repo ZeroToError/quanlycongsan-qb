@@ -1,6 +1,9 @@
 import {Component, isDevMode, OnInit} from '@angular/core';
 import {KeHoach} from '../../_models/ke-hoach';
 import {KeHoachService} from '../../_services/ke-hoach.service';
+import {LibraryService} from '../../_services/library.service';
+import {PhongBan} from '../../_models/phong-ban';
+import {LoaiKeHoach} from '../../_models/loai-ke-hoach';
 
 @Component({
     selector: 'app-hien-thi-ke-hoach',
@@ -9,22 +12,48 @@ import {KeHoachService} from '../../_services/ke-hoach.service';
 })
 export class HienThiKeHoachComponent implements OnInit {
     keHoachs: KeHoach[];
+    phongBans: PhongBan[];
+    loaiKeHoach: LoaiKeHoach[];
     total: number;
     page: number;
     size: number;
     totalPage: number;
+    tinhTrang: number;
 
-    constructor(private keHoachService: KeHoachService) {
+    searchFilter = {
+        tenKeHoach: '',
+        loaiKeHoach: '',
+        phongBan: '',
+        nam: '',
+        namHoc: ''
+    };
+
+    constructor(private keHoachService: KeHoachService, private libraryService: LibraryService) {
         this.keHoachs = [];
+        this.phongBans = [];
+        this.loaiKeHoach = [];
         this.total = 0;
         this.page = 0;
         this.size = 10;
         this.totalPage = 0;
+        this.tinhTrang = 2;
     }
 
     ngOnInit() {
+        this.getLibrary();
         this.getKeHoachs();
 
+    }
+
+    getLibrary() {
+        this.libraryService.getLoaiKeHoachs().subscribe(
+            value => this.loaiKeHoach = value['result'],
+            error => alert('Lỗi')
+        );
+        this.libraryService.getPhongBans().subscribe(
+            value => this.phongBans = value['result'],
+            error => alert('Lỗi')
+        );
     }
 
     getKeHoachs() {
@@ -57,6 +86,22 @@ export class HienThiKeHoachComponent implements OnInit {
                 }
             );
         }
+    }
+
+    searchFilterFn() {
+        this.keHoachService.getAllFilter(this.page, this.size, this.searchFilter).subscribe(
+            result => {
+                if (result['errorCode'] === 0) {
+                    this.keHoachs = result['result']['items'];
+                    this.total = result['result']['totals'];
+                    this.totalPage = Math.ceil(this.total / this.size);
+                } else {
+                    alert('lỗi');
+                }
+            }, error2 => {
+                alert('Lỗi');
+            }
+        )
     }
 
     setItemPerPage(itemPerPage: number) {
