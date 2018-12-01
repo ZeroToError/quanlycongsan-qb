@@ -37,7 +37,7 @@ export const ROUTES: RouteInfo[] = [
         child: []
     },
     {
-        path: '/hien-thi-tai-san',
+        path: '/tai-san',
         title: 'Tài sản',
         icon: 'business_bank',
         class: '',
@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
         child: []
     },
     {
-        path: '/hien-thi-nhom-tai-san',
+        path: '/nhom-tai-san',
         title: 'Nhóm tài sản',
         icon: 'business_bank',
         class: '',
@@ -60,8 +60,8 @@ export const ROUTES: RouteInfo[] = [
     },
 
     {
-        path: '/hien-thi-de-xuat',
-        title: 'Hiển thị đề xuất',
+        path: '/de-xuat',
+        title: 'Quản lý đề xuất',
         icon: 'business_bank',
         class: '',
         type: 0,
@@ -72,8 +72,8 @@ export const ROUTES: RouteInfo[] = [
     },
 
     {
-        path: '/hien-thi-ke-hoach',
-        title: 'Hiển thị kế hoạch',
+        path: '/ke-hoach',
+        title: 'Quản lý kế hoạch',
         icon: 'business_bank',
         class: '',
         type: 0,
@@ -96,7 +96,7 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/thong-ke',
-        title: 'Tài sản',
+        title: 'Thống kê tài sản',
         icon: 'business_money-coins',
         class: '',
         type: 4,
