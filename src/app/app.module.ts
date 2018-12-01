@@ -27,7 +27,6 @@ import {ToastrModule} from 'ngx-toastr';
     RouterModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-      FormsModule,
       HttpClientModule,
       ToastrModule.forRoot()
   ],

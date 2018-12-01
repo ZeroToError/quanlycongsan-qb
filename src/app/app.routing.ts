@@ -6,6 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './auth.guard';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -36,7 +37,8 @@ const routes: Routes = [
     imports: [
         CommonModule,
         BrowserModule,
-        RouterModule.forRoot(routes, {useHash: true})
+        RouterModule.forRoot(routes, {useHash: true}),
+        FormsModule
     ],
     exports: [],
 })
