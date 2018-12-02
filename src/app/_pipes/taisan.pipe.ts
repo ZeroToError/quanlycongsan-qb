@@ -15,7 +15,6 @@ export class TaisanPipe implements PipeTransform {
             return items;
         }
         for (const key in filter) {
-
             if (filter[key].normalize('NFD').replace(/[\u0300-\u036f]/g, '') !== '') {
                 returnItems = returnItems.filter(value => {
                     return value[key].normalize('NFD').replace(/[\u0300-\u036f]/g, '').indexOf(filter[key].normalize('NFD').replace(/[\u0300-\u036f]/g, '')) > -1;

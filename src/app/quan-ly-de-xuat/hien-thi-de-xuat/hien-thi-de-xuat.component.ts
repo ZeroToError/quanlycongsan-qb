@@ -25,7 +25,7 @@ export class HienThiDeXuatComponent implements OnInit {
               tenDeXuat: 'Đề xuất 1',
               nam: 2018,
               lyDo: 'lý do 1',
-              ngayHoanThanh: Date.now(),
+              ngayHoanThanh: new Date(),
               trangThai: 1
           }
       ]
@@ -40,19 +40,5 @@ export class HienThiDeXuatComponent implements OnInit {
     }
     arrayOne(): any[] {
         return Array(this.totalPage);
-    }
-
-    changePage(page: number) {
-        this.page = page - 1;
-        this.getTaiSans();
-    }
-
-    previousPage() {
-        this.page--;
-        this.getTaiSans();
-    }
-    nextPage() {
-        this.page++;
-        this.getTaiSans();
     }
 }

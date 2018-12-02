@@ -38,7 +38,7 @@ export const AdminLayoutRoutes: Routes = [
             {path: '', redirectTo: 'hien-thi-tai-san', pathMatch: 'full'},
             {path: 'hien-thi-tai-san', component: HienThiTaiSanComponent},
             {path: 'them-tai-san', component: ThemTaiSanComponent},
-            {path: 'sua-tai-san', component: SuaTaiSanComponent}
+            {path: 'sua-tai-san/:id', component: SuaTaiSanComponent}
         ]
     },
     {
