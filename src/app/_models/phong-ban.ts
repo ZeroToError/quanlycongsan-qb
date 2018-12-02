@@ -1,4 +1,4 @@
-export class PhongBan {
-    id: number;
-    ten: string;
+import {Library} from './library';
+
+export class PhongBan extends Library{
 }

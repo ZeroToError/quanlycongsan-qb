@@ -14,10 +14,11 @@ export class ThemNhomTaiSanComponent implements OnInit {
   saveClicked = false;
   constructor(private nhomTaiSanService: NhomTaiSanService, private router: Router) {
     this.nhomTaiSan = {
-        id: 0 ,
+        id: 0,
         ten: '',
-        ma: ''
-    };
+        ma: '',
+        child: []
+    }
   }
 
   ngOnInit() {

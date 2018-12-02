@@ -1,4 +1,4 @@
-export class LoaiTaiSan {
-    id: number;
-    ten: string;
+import {Library} from './library';
+
+export class LoaiTaiSan extends Library {
 }

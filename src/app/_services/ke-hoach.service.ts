@@ -1,83 +1,50 @@
 import {Injectable} from '@angular/core';
 import {KeHoach} from '../_models/ke-hoach';
 import {Observable, of} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {API_URL, httpOptions} from '../_constants/constants';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Injectable({
     providedIn: 'root'
 })
 export class KeHoachService {
-    keHoach: KeHoach[];
+    private keHoachUrl = API_URL + '/kehoachs';
+    keHoachs: KeHoach[];
 
-    constructor() {
-        this.keHoach = [];
-        this.keHoach = [
+    constructor(private http: HttpClient) {
+        this.keHoachs = [];
+    }
+
+    getAll(page: number, size: number): Observable<any> {
+
+        const start = +page * +size;
+        let end = +start + +size;
+        if (end > +this.keHoachs.length - 1) {
+            end = +this.keHoachs.length - 1;
+        }
+        const result = this.keHoachs.slice(start, end);
+        return of(
             {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
+                result: result,
+                totals: this.keHoachs.length
             }
-        ];
+        );
     }
 
-    getAll(): Observable<KeHoach[]> {
-        return of(this.keHoach);
+    getAllFromApi(page: number, size: number): Observable<any> {
+        const url = `${this.keHoachUrl}/?offset=${page}&limit=${size}`;
+        return this.http.get(url);
     }
+
+    getAllFilter(page: number, size: number, filter: any): Observable<any> {
+        filter = Array(filter);
+        const url = `${this.keHoachUrl}/?offset=${page}&limit=${size}`;
+        return this.http.get(url);
+    }
+
+    add(newKeHoach: any): Observable<any> {
+        return this.http.post(this.keHoachUrl, newKeHoach, httpOptions);
+    }
+
 }
