@@ -6,6 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import {API_URL} from '../_constants/constants';
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +27,15 @@ export class NhomTaiSanService {
         );
     }
 
-    getNhomTaiKhoan(id: number): NhomTaiSan {
-        return this.listNhomTaiSan.find(x => x.id === id);
+    // getNhomTaiKhoan(id: number): NhomTaiSan {
+    //     return this.listNhomTaiSan.find(x => x.id === id);
+    // }
+
+    addNhomTaiSan(nhomTaiSan: NhomTaiSan): Observable<any> {
+        return this.http.post<any>(this.nhomTaiSanUrl, nhomTaiSan, httpOptions).pipe(
+            tap((x: any) => console.log(`add nhom tai san ok ${x}`)),
+            catchError(this.handleError<any>('add nhom tai san'))
+        );
     }
 
 

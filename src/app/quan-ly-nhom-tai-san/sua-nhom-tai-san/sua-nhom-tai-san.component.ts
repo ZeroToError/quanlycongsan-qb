@@ -19,7 +19,7 @@ export class SuaNhomTaiSanComponent implements OnInit {
 
 
   ngOnInit() {
-    this.nhomTaiSan = this.nhomTaiSanService.getNhomTaiKhoan();
+
   }
 
     isValidated(): boolean {
