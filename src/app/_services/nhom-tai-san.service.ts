@@ -11,7 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class NhomTaiSanService {
 
-    private nhomTaiSanUrl = 'http://103.95.197.121:9000/api/nhomtaisans';
+    private nhomTaiSanUrl = 'http://178.128.114.26/api/nhomtaisans';
     constructor(private http: HttpClient) { }
 
     getAll(): Observable<any> {
