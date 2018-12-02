@@ -2,8 +2,8 @@ import {Component, isDevMode, OnInit} from '@angular/core';
 import {KeHoach} from '../../_models/ke-hoach';
 import {KeHoachService} from '../../_services/ke-hoach.service';
 import {LibraryService} from '../../_services/library.service';
-import {PhongBan} from '../../_models/phong-ban';
 import {LoaiKeHoach} from '../../_models/loai-ke-hoach';
+import {DonVi} from '../../_models/don-vi';
 
 @Component({
     selector: 'app-hien-thi-ke-hoach',
@@ -11,9 +11,9 @@ import {LoaiKeHoach} from '../../_models/loai-ke-hoach';
     styleUrls: ['./hien-thi-ke-hoach.component.scss']
 })
 export class HienThiKeHoachComponent implements OnInit {
-    keHoachs: KeHoach[];
-    phongBans: PhongBan[];
-    loaiKeHoach: LoaiKeHoach[];
+    keHoachs: KeHoach[] = [];
+    donVis: DonVi[] = [];
+    loaiKeHoach: LoaiKeHoach[] = [];
     total: number;
     page: number;
     size: number;
@@ -23,15 +23,12 @@ export class HienThiKeHoachComponent implements OnInit {
     searchFilter = {
         tenKeHoach: '',
         loaiKeHoach: '',
-        phongBan: '',
+        donVi: '',
         nam: '',
         namHoc: ''
     };
 
     constructor(private keHoachService: KeHoachService, private libraryService: LibraryService) {
-        this.keHoachs = [];
-        this.phongBans = [];
-        this.loaiKeHoach = [];
         this.total = 0;
         this.page = 0;
         this.size = 10;
@@ -42,7 +39,6 @@ export class HienThiKeHoachComponent implements OnInit {
     ngOnInit() {
         this.getLibrary();
         this.getKeHoachs();
-
     }
 
     getLibrary() {
@@ -50,8 +46,8 @@ export class HienThiKeHoachComponent implements OnInit {
             value => this.loaiKeHoach = value['result'],
             error => alert('Lỗi')
         );
-        this.libraryService.getPhongBans().subscribe(
-            value => this.phongBans = value['result'],
+        this.libraryService.getDonVis().subscribe(
+            value => this.donVis = value['result'],
             error => alert('Lỗi')
         );
     }
@@ -86,22 +82,6 @@ export class HienThiKeHoachComponent implements OnInit {
                 }
             );
         }
-    }
-
-    searchFilterFn() {
-        this.keHoachService.getAllFilter(this.page, this.size, this.searchFilter).subscribe(
-            result => {
-                if (result['errorCode'] === 0) {
-                    this.keHoachs = result['result']['items'];
-                    this.total = result['result']['totals'];
-                    this.totalPage = Math.ceil(this.total / this.size);
-                } else {
-                    alert('lỗi');
-                }
-            }, error2 => {
-                alert('Lỗi');
-            }
-        )
     }
 
     setItemPerPage(itemPerPage: number) {

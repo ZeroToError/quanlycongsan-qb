@@ -41,5 +41,9 @@ export class LibraryService {
         return this.http.get<PhongBan[]>(this.libraryUrl + '?type=phongban');
     }
 
+    getDonVis(): Observable<PhongBan[]> {
+        return this.http.get<PhongBan[]>(this.libraryUrl + '?type=donvi');
+    }
+
 
 }
