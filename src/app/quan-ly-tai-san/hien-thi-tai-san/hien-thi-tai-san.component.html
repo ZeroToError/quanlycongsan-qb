@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Bộ lọc</h4>
+          <h4 class="card-title"></h4>
         </div>
         <div class="card-body">
           <form>
@@ -22,14 +22,14 @@
                 <div class="form-group">
                   <label>Đơn vị</label>
                   <select class="form-control" name="donVi" (change)="updateSelectedDonVi($event.target.value)">
-                    <option value="">--</option>
+                    <option value="">Chọn đơn vị</option>
                     <option *ngFor="let item of donVis" [value]="item.id">{{item.ten}}</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Phòng ban</label>
                   <select class="form-control" name="phongBan" [(ngModel)]="searchFilter.phongBan">
-                    <option value="">--</option>
+                    <option value="">Chọn phòng ban</option>
                     <option *ngFor="let item of selectedDonVi.child" value="{{item.id}}">{{item.ten}}</option>
                   </select>
                 </div>
@@ -39,14 +39,14 @@
                 <div class="form-group">
                   <label>Nhóm tài sản</label>
                   <select class="form-control" name="nhomTaiSan" [(ngModel)]="searchFilter.nhomTaiSan">
-                    <option value="">--</option>
+                    <option value="">Chọn nhóm tài sản</option>
                     <option *ngFor="let item of nhomTaiSans" value="{{item.ten}}">{{item.ten}}</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Loại tài sản</label>
                   <select class="form-control" name="loaiTaiSan" [(ngModel)]="searchFilter.loaiTaiSan">
-                    <option value="">--</option>
+                    <option value="">Chọn loại tài sản</option>
                     <option *ngFor="let item of loaiTaiSans" value="{{item.ten}}">{{item.ten}}</option>
                   </select>
                 </div>
@@ -118,8 +118,7 @@
                   <td>{{taiSan.thongSoKyThuat}}</td>
                   <td>{{taiSan.soluong}}</td>
                   <td>
-                    <button class="btn btn-md btn-primary"><i class="now-ui-icons travel_info"></i></button>
-                    <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i></button>
+                    <button class="btn btn-md btn-info" routerLink="/tai-san/sua-tai-san/{{taiSan.id}}"><i class="now-ui-icons travel_info"></i></button>
                     <button class="btn btn-md btn-warning"><i class="now-ui-icons ui-1_simple-delete"></i></button>
                   </td>
                 </tr>
