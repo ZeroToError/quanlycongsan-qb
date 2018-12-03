@@ -22,6 +22,7 @@ import {TaiSanComponent} from '../../quan-ly-tai-san/tai-san/tai-san.component';
 import {KeHoachComponent} from '../../quan-ly-ke-hoach/ke-hoach/ke-hoach.component';
 import {NhomTaiSanComponent} from '../../quan-ly-nhom-tai-san/nhom-tai-san/nhom-tai-san.component';
 import {DeXuatComponent} from '../../quan-ly-de-xuat/de-xuat/de-xuat.component';
+import {ThongKeTaiSanComponent} from '../../thong-ke/thong-ke-tai-san/thong-ke-tai-san.component';
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: DashboardComponent},
@@ -69,5 +70,5 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
 
-    {path: 'thong-ke', component: ThongKeComponent},
+    {path: 'thong-ke-tai-san', component: ThongKeTaiSanComponent},
 ];

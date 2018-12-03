@@ -30,6 +30,7 @@ import {KeHoachComponent} from '../../quan-ly-ke-hoach/ke-hoach/ke-hoach.compone
 import {NhomTaiSanComponent} from '../../quan-ly-nhom-tai-san/nhom-tai-san/nhom-tai-san.component';
 import {DeXuatComponent} from '../../quan-ly-de-xuat/de-xuat/de-xuat.component';
 import {TaisanPipe} from '../../_pipes/taisan.pipe';
+import {ThongKeTaiSanComponent} from '../../thong-ke/thong-ke-tai-san/thong-ke-tai-san.component';
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import {TaisanPipe} from '../../_pipes/taisan.pipe';
         KeHoachComponent,
         NhomTaiSanComponent,
         DeXuatComponent,
-        TaisanPipe
+        TaisanPipe,
+        ThongKeTaiSanComponent
     ]
 })
 
