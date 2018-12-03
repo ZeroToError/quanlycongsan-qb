@@ -4,11 +4,7 @@ import {of} from 'rxjs/index';
 import {Observable} from 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import {API_URL} from '../_constants/constants';
-
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {API_URL, httpOptions} from '../_constants/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +27,16 @@ export class NhomTaiSanService {
     //     return this.listNhomTaiSan.find(x => x.id === id);
     // }
 
-    addNhomTaiSan(nhomTaiSan: NhomTaiSan): Observable<any> {
+    addNhomTaiSan(nhomTaiSan: any): Observable<any> {
         return this.http.post<any>(this.nhomTaiSanUrl, nhomTaiSan, httpOptions).pipe(
+            tap((x: any) => console.log(`add nhom tai san ok ${x}`)),
+            catchError(this.handleError<any>('add nhom tai san'))
+        );
+    }
+
+
+    editNhomTaiSan(nhomTaiSan: any): Observable<any> {
+        return this.http.put<any>(`${this.nhomTaiSanUrl}/${nhomTaiSan.id}`, nhomTaiSan, httpOptions).pipe(
             tap((x: any) => console.log(`add nhom tai san ok ${x}`)),
             catchError(this.handleError<any>('add nhom tai san'))
         );
