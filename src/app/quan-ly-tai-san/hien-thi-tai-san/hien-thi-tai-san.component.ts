@@ -7,6 +7,7 @@ import {PhongBan} from '../../_models/phong-ban';
 import {LoaiTaiSan} from '../../_models/loai-tai-san';
 import {LibraryService} from '../../_services/library.service';
 import {DonVi} from '../../_models/don-vi';
+import {SharingService} from '../../_services/sharing.service';
 
 @Component({
   selector: 'app-hien-thi-tai-san',
@@ -23,141 +24,43 @@ export class HienThiTaiSanComponent implements OnInit {
     loaiTaiSans: LoaiTaiSan[] = [];
     nhomTaiSans: NhomTaiSan[] = [];
     donVis: DonVi[] = [];
-    selectedDonVi: DonVi;
 
 
     searchFilter = {
         tenTaiSan: '',
         loaiTaiSan: '',
         nhomTaiSan: '',
-        phongBan: ''
+        donVi: ''
     };
   constructor(private taiSanService: TaiSanService,
-              private libraryService: LibraryService) {
+              private libraryService: LibraryService,
+              private sharingService: SharingService) {
     this.taiSans = [];
       this.total = 0;
       this.page = 0;
       this.size = 10;
       this.totalPage = 0;
-      this.selectedDonVi = new DonVi();
   }
 
   async ngOnInit() {
     this.getTaiSans();
-
-    if (isDevMode()) {
-       this.initOnLocal();
-    } else {
-        this.initOnServerDemo();
-    }
+    this.initOnLocal();
   }
 
   initOnLocal() {
       this.getNhomTaiSans();
       this.getLoaiTaiSans();
       this.getDonViTinhs();
-      this.getDonVisVaPhongBans();
+      this.getDonVis();
   }
 
-  initOnServerDemo() {
-      this.loaiTaiSans = [
-          {
-              id: 1,
-              ten: 'Tài sản cố định',
-              ma: '',
-              child: []
-          },
-          {
-              id: 2,
-              ten: 'Thiết bị thực hành',
-              ma: '',
-              child: []
-          }
-      ];
-      this.nhomTaiSans = [
-          {
-              id: 1,
-              ten: 'CPU',
-              ma: 'ABC',
-              child: []
-          },
-          {
-              id: 2,
-              ten: 'Màn hình',
-              ma: 'XYZ',
-              child: []
-          },
-          {
-              id: 3,
-              ten: 'Bàn ghế',
-              ma: 'GHI',
-              child: []
-          }
-      ];
-      this.donVis = [
-          {
-              id: 1,
-              ten: 'Chiếc',
-              ma: '',
-              child: []
-          },
-          {
-              id: 2,
-              ten: 'Cái',
-              ma: '',
-              child: []
-          }
-      ];
-
-      this.donVis = [
-          {
-              id: 1,
-              ten: 'Khoa CNTT',
-              ma: 'ABC',
-              child: [
-                  {
-                      id: 1,
-                      ten: 'Văn phòng khoa',
-                      ma: 'ABC',
-                      child: []
-                  },
-                  {
-                      id: 2,
-                      ten: 'Phòng nước',
-                      ma: 'ABC',
-                      child: []
-                  }
-              ]
-          },
-          {
-              id: 2,
-              ten: 'Khoa ĐTVT',
-              ma: 'ABC',
-              child: [
-                  {
-                      id: 3,
-                      ten: 'Văn phòng cô',
-                      ma: 'ABC',
-                      child: []
-                  },
-                  {
-                      id: 4,
-                      ten: 'Phòng nước',
-                      ma: 'ABC',
-                      child: []
-                  }
-              ]
-          }
-      ];
-      this.selectedDonVi = this.donVis[0];
-  }
 
   getNhomTaiSans() {
         this.libraryService.getNhomTaiSans().subscribe(
             result => {
                 this.nhomTaiSans = result['result'];
             }, error2 => {
-                alert('Khong the fetch nhom tai san');
+                this.sharingService.notifError('Khong the fetch nhom tai san ' + error2['errorMessage']);
             }
         );
     }
@@ -167,7 +70,7 @@ export class HienThiTaiSanComponent implements OnInit {
             result => {
                 this.loaiTaiSans = result['result'];
             }, error2 => {
-                alert('Khong the fetch loai tai san');
+                this.sharingService.notifError('Khong the fetch loai tai san');
             }
         );
     }
@@ -177,18 +80,17 @@ export class HienThiTaiSanComponent implements OnInit {
             result => {
                 // this.donViTinh = result['result'];
             }, error2 => {
-                alert('Khong the fetch don vi tinh');
+                this.sharingService.notifError('Khong the fetch don vi tinh');
             }
         );
     }
 
-    getDonVisVaPhongBans() {
-        this.libraryService.getDonVisVaPhongBans().subscribe(
+    getDonVis() {
+        this.libraryService.getDonVis().subscribe(
             result => {
                 this.donVis = result['result'];
-                this.selectedDonVi = this.donVis[0];
             }, error2 => {
-                alert('Khong the fetch don vi tinh');
+                this.sharingService.notifError('Khong the fetch don vi tinh');
             }
         );
     }
@@ -250,9 +152,5 @@ export class HienThiTaiSanComponent implements OnInit {
     nextPage() {
         this.page++;
         this.getTaiSans();
-    }
-
-    updateSelectedDonVi(idDonVi: number) {
-      this.selectedDonVi = this.donVis.find(dv => +dv.id === +idDonVi);
     }
 }

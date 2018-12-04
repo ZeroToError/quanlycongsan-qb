@@ -83,6 +83,7 @@
                 <div class="form-group">
                   <label>Năm sử dụng  <span class="error">*</span></label>
                   <input type="date" name="namSuDung" class="form-control" [(ngModel)]="newTaiSan.namSuDung">
+                  <p *ngIf="newTaiSan.namSuDung.toString() === '' && saveClicked" class="error">Trường này là bắt buộc</p>
                 </div>
                 <div class="form-group">
                   <label>Thông số kỹ thuật  <span class="error">*</span></label>

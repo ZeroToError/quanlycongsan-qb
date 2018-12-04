@@ -48,7 +48,7 @@ export const AdminLayoutRoutes: Routes = [
             {path: '', redirectTo: 'hien-thi-nhom-tai-san', pathMatch: 'full'},
             {path: 'hien-thi-nhom-tai-san', component: HienThiNhomTaiSanComponent},
             {path: 'them-nhom-tai-san', component: ThemNhomTaiSanComponent},
-            {path: 'sua-nhom-tai-san', component: SuaNhomTaiSanComponent},
+            {path: 'sua-nhom-tai-san/:id', component: SuaNhomTaiSanComponent},
         ]
     },
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NhomTaiSanService} from '../../_services/nhom-tai-san.service';
 import {NhomTaiSan} from '../../_models/nhom-tai-san';
 import {Router} from '@angular/router';
+import {SharingService} from '../../_services/sharing.service';
 
 @Component({
   selector: 'app-them-nhom-tai-san',
@@ -10,16 +11,15 @@ import {Router} from '@angular/router';
 })
 export class ThemNhomTaiSanComponent implements OnInit {
 
-  nhomTaiSan: NhomTaiSan;
+  nhomTaiSan = {
+      ten: '',
+      ma: '',
+  };
   saveClicked = false;
-  constructor(private nhomTaiSanService: NhomTaiSanService, private router: Router) {
-    this.nhomTaiSan = {
-        id: 0,
-        ten: '',
-        ma: '',
-        child: []
+  constructor(private nhomTaiSanService: NhomTaiSanService,
+              private router: Router,
+              private sharingService: SharingService) {
     }
-  }
 
   ngOnInit() {
   }
@@ -30,18 +30,18 @@ export class ThemNhomTaiSanComponent implements OnInit {
           this.nhomTaiSanService.addNhomTaiSan(this.nhomTaiSan).subscribe(
               result => {
                   if ( result['errorCode'] === 0) {
-                      alert('them thanh cong');
+                      this.sharingService.notifInfo('Thêm nhóm tài sản thành công');
                       this.router.navigate(['/nhom-tai-san']);
                   } else {
-                      alert('thêm nhóm tài sản thất bại');
+                      this.sharingService.notifError('Thêm nhóm tài sản thất bại ' + result['errorMessage']);
                   }
               },
               error2 => {
-                alert('thêm nhóm tài sản thất bại');
+                  this.sharingService.notifError('Thêm nhóm tài sản thất bại ' + error2['errorMessage']);
               }
           );
       } else {
-          alert('kiểm tra dữ liệu');
+          this.sharingService.notifError('Vui lòng kiểm tra lại dữ liệu');
       }
 
     }

@@ -59,23 +59,29 @@ export class ThemTaiSanComponent implements OnInit {
 
 
   addTaiSanCuThe(soluong: number) {
-      this.newTaiSan.taiSanCuThe = [];
-    for (let i = 1; i <= soluong; i++) {
-      this.newTaiSan.taiSanCuThe.push(
-          {
-              id: 0,
-              idTaiSan: this.newTaiSan.id,
-              maTaiSan: '',
-              maThietBi: '',
-              tenTaiSan: this.newTaiSan.tenTaiSan,
-              namSuDung: this.newTaiSan.namSuDung,
-              thongSoKyThuat: '',
-              tyLeChatLuong: 0,
-              tinhTrang: 0,
-              ghiChu: ''
+      const length = this.newTaiSan.taiSanCuThe.length;
+      if (soluong === 0) {
+          this.newTaiSan.taiSanCuThe = [];
+      } else if (soluong < length) {
+          this.newTaiSan.taiSanCuThe.splice(soluong, length - soluong);
+      } else if (soluong > length) {
+          for (let i = 1; i <= soluong - length; i++) {
+              this.newTaiSan.taiSanCuThe.push(
+                  {
+                      id: 0,
+                      idTaiSan: this.newTaiSan.id,
+                      maTaiSan: '',
+                      maThietBi: '',
+                      tenTaiSan: this.newTaiSan.tenTaiSan,
+                      namSuDung: this.newTaiSan.namSuDung,
+                      thongSoKyThuat: '',
+                      tyLeChatLuong: 0,
+                      tinhTrang: 0,
+                      ghiChu: ''
+                  }
+              )
           }
-      )
-    }
+      }
   }
 
   removeTSCT(i: number) {
@@ -107,7 +113,7 @@ export class ThemTaiSanComponent implements OnInit {
             result => {
                 this.nhomTaiSans = result['result'];
             }, error2 => {
-                alert('Khong the fetch nhom tai san');
+                this.sharingService.notifError('Khong the fetch nhom tai san');
             }
         );
     }
@@ -117,7 +123,7 @@ export class ThemTaiSanComponent implements OnInit {
             result => {
                 this.loaiTaiSans = result['result'];
             }, error2 => {
-                alert('Khong the fetch loai tai san');
+                this.sharingService.notifError('Khong the fetch loai tai san');
             }
         );
     }
@@ -127,7 +133,7 @@ export class ThemTaiSanComponent implements OnInit {
             result => {
                 this.donViTinhs = result['result'];
             }, error2 => {
-                alert('Khong the fetch don vi tinh');
+                this.sharingService.notifError('Khong the fetch don vi tinh');
             }
         );
     }
@@ -138,7 +144,7 @@ export class ThemTaiSanComponent implements OnInit {
                 this.donVis = result['result'];
                 this.selectedDonVi = this.donVis[0];
             }, error2 => {
-                alert('Khong the fetch don vi tinh');
+                this.sharingService.notifError('Khong the fetch don vi tinh');
             }
         );
     }
@@ -155,6 +161,19 @@ export class ThemTaiSanComponent implements OnInit {
             && +this.newTaiSan.idNhomTaiSan !== 0
             && this.newTaiSan.maTaiSan !== ''
             && this.newTaiSan.maThietBi !== ''
-            && this.newTaiSan.thongSoKyThuat !== ''
+            && this.newTaiSan.namSuDung.toString() !== ''
+            && this.validateTaiSanCuThe();
+    }
+
+    validateTaiSanCuThe() {
+        for (const item of this.newTaiSan.taiSanCuThe) {
+            if (item.maTaiSan === ''
+                || item.maThietBi === ''
+                || item.thongSoKyThuat === ''
+                || item.namSuDung.toString() === '') {
+                return false;
+            }
+        }
+        return true;
     }
 }
