@@ -13,23 +13,6 @@ export class KeHoachService {
 
     constructor(private http: HttpClient) {
         this.keHoachs = [];
-        for (let i = 0; i <= 50; i++) {
-            this.keHoachs.push(
-                {
-                    id: i,
-                    namHoc: '2018-2019',
-                    nam: 2019,
-                    file: 'abc.xyz',
-                    tenDonVi: 'CNTT',
-                    tenLoaiKeHoach: 'Kế hoạch mới',
-                    tenKeHoach: 'Kế hoạch',
-                    idTinhTrang: 1
-                });
-        }
-    }
-
-    getLocal(): Observable<any> {
-        return of(this.keHoachs);
     }
 
     getAll(page: number, size: number): Observable<any> {
