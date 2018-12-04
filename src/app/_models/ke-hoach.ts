@@ -6,5 +6,5 @@ export class KeHoach {
     file: string;
     nam: number;
     namHoc: string;
-    idTinhTrang: number;
+    trangThai: string;
 }

@@ -113,12 +113,12 @@
                                 <td>{{keHoach.tenKeHoach}}</td>
                                 <td>{{keHoach.tenDonVi}}</td>
                                 <td>{{keHoach.tenLoaiKeHoach}}</td>
-                                <td><a href="{{keHoach.file}}">{{keHoach.file}}</a></td>
+                                <td><a href="{{keHoach.filePath}}" *ngIf="keHoach.filePath">File path</a></td>
                                 <td>{{keHoach.nam}}</td>
                                 <td>{{keHoach.namHoc}}</td>
                                 <td>
                                     <button class="btn btn-md btn-primary" (click)="duyetKeHoach(keHoach.id)"
-                                            [disabled]="keHoach.idTinhTrang==2"><i class="now-ui-icons travel_info"></i>
+                                            [disabled]="keHoach.trangThai===trangThai"><i class="now-ui-icons travel_info"></i>
                                     </button>
                                     <button class="btn btn-md btn-info"><i
                                             class="now-ui-icons travel_info"></i>
