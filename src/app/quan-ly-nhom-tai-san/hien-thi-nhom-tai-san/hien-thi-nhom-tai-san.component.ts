@@ -19,9 +19,13 @@ export class HienThiNhomTaiSanComponent implements OnInit {
   ngOnInit() {
       this.nhomTaiSanService.getAll().subscribe(
           result => {
-              this.nhomTaiSan = result.result;
+              if (+result['errorCode'] === 0) {
+                  this.nhomTaiSan = result.result;
+              } else {
+                  this.sharingService.notifError('Không thể hiển thị nhóm tài sản ' + result['errorMessage']);
+              }
           }, error2 => {
-              this.sharingService.notifError('Không thể hiển thị nhóm tài sản ' + error2['errorMessage']);
+              this.sharingService.notifError('Không thể hiển thị nhóm tài sản ');
           }
       )
   }

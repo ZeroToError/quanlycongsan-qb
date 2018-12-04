@@ -12,7 +12,7 @@
             <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Tên hoặc mã tài sản</label>
+                  <label>Tên tài sản</label>
                   <input type="text" class="form-control" name="tenTaiSan" value="" [(ngModel)]="searchFilter.tenTaiSan">
                 </div>
                 <div class="form-group">
@@ -91,7 +91,7 @@
                 <th>Tên tài sản</th>
                 <th>Thông số kỹ thuật</th>
                 <th>Số lượng</th>
-                <th>Action</th>
+                <th>Hành động</th>
               </thead>
               <tbody>
                 <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan}">
@@ -103,7 +103,7 @@
                   <td>{{taiSan.namSuDung | date}}</td>
                   <td>{{taiSan.tenTaiSan}}</td>
                   <td>{{taiSan.thongSoKyThuat}}</td>
-                  <td>{{taiSan.soluong}}</td>
+                  <td>{{taiSan.soLuong}}</td>
                   <td>
                     <button class="btn btn-md btn-info" routerLink="/tai-san/sua-tai-san/{{taiSan.id}}"><i class="now-ui-icons travel_info"></i></button>
                     <button class="btn btn-md btn-warning"><i class="now-ui-icons ui-1_simple-delete"></i></button>

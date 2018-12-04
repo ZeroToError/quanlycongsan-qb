@@ -103,36 +103,20 @@ export class HienThiTaiSanComponent implements OnInit {
     }
 
     getTaiSans() {
-        if (isDevMode()) {
-            this.taiSanService.getAllFromApi(this.page, this.size).subscribe(
-                result => {
+        this.taiSanService.getAllFromApi(this.page, this.size).subscribe(
+            result => {
 
-                    if (result['errorCode'] === 0) {
-                        this.taiSans = result['result']['items'];
-                        this.total = result['result']['totals'];
-                        this.totalPage =  Math.ceil(this.total / this.size) ;
-                    } else {
-                        alert('lỗi 2');
-                    }
-                }, error2 => {
-                    console.log('Lỗi', error2);
+                if (+result['errorCode'] === 0) {
+                    this.taiSans = result['result']['items'];
+                    this.total = result['result']['totals'];
+                    this.totalPage =  Math.ceil(this.total / this.size) ;
+                } else {
+                    this.sharingService.notifError('Không thể load tài sản');
                 }
-            );
-        } else {
-            this.taiSanService.getAll(this.page, this.size).subscribe(
-                result => {
-                    if (result['errorCode'] === undefined) {
-                        this.taiSans = result['result'];
-                        this.total = result['totals'];
-                        this.totalPage =  Math.ceil(this.total / this.size) ;
-                    } else {
-                        alert('lỗi');
-                    }
-                }, error2 => {
-                    alert('Lỗi');
-                }
-            );
-        }
+            }, error2 => {
+                this.sharingService.notifError('Không thể load tài sản');
+            }
+        );
     }
 
 

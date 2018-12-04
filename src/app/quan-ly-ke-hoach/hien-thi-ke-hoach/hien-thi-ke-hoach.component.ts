@@ -4,6 +4,7 @@ import {KeHoachService} from '../../_services/ke-hoach.service';
 import {LibraryService} from '../../_services/library.service';
 import {LoaiKeHoach} from '../../_models/loai-ke-hoach';
 import {DonVi} from '../../_models/don-vi';
+import {SharingService} from '../../_services/sharing.service';
 
 @Component({
     selector: 'app-hien-thi-ke-hoach',
@@ -25,10 +26,13 @@ export class HienThiKeHoachComponent implements OnInit {
         loaiKeHoach: '',
         donVi: '',
         nam: '',
-        namHoc: ''
+        namHoc: '',
+        trangThai: ''
     };
 
-    constructor(private keHoachService: KeHoachService, private libraryService: LibraryService) {
+    constructor(private keHoachService: KeHoachService,
+                private libraryService: LibraryService,
+                private sharingService: SharingService) {
         this.total = 0;
         this.page = 0;
         this.size = 10;
@@ -44,44 +48,28 @@ export class HienThiKeHoachComponent implements OnInit {
     getLibrary() {
         this.libraryService.getLoaiKeHoachs().subscribe(
             value => this.loaiKeHoach = value['result'],
-            error => alert('Lỗi')
+            error => this.sharingService.notifError('Không thể load loại kế hoạch')
         );
         this.libraryService.getDonVis().subscribe(
             value => this.donVis = value['result'],
-            error => alert('Lỗi')
+            error2 => this.sharingService.notifError('Không thể load đơn vị')
         );
     }
 
     getKeHoachs() {
-        if (isDevMode()) {
-            this.keHoachService.getAllFromApi(this.page, this.size).subscribe(
-                result => {
-                    if (result['errorCode'] === 0) {
-                        this.keHoachs = result['result']['items'];
-                        this.total = result['result']['totals'];
-                        this.totalPage = Math.ceil(this.total / this.size);
-                    } else {
-                        alert('lỗi');
-                    }
-                }, error2 => {
-                    alert('Lỗi');
+        this.keHoachService.getAllFromApi(this.page, this.size).subscribe(
+            result => {
+                if (+result['errorCode'] === 0) {
+                    this.keHoachs = result['result']['items'];
+                    this.total = result['result']['totals'];
+                    this.totalPage = Math.ceil(this.total / this.size);
+                } else {
+                    this.sharingService.notifError('Không thể load kế hoạch');
                 }
-            );
-        } else {
-            this.keHoachService.getAll(this.page, this.size).subscribe(
-                result => {
-                    if (result['errorCode'] === undefined) {
-                        this.keHoachs = result['result'];
-                        this.total = result['totals'];
-                        this.totalPage = Math.ceil(this.total / this.size);
-                    } else {
-                        alert('lỗi');
-                    }
-                }, error2 => {
-                    alert('Lỗi');
-                }
-            );
-        }
+            }, error2 => {
+                this.sharingService.notifError('Không thể load kế hoạch');
+            }
+        );
     }
 
     setItemPerPage(itemPerPage: number) {
@@ -109,21 +97,22 @@ export class HienThiKeHoachComponent implements OnInit {
         this.getKeHoachs();
     }
 
-    duyetKeHoach(id: number) {
-        const keHoachDuyet = {'Id': id, 'IdTrangThai': this.idTinhTrang};
+    duyetKeHoach(keHoach: KeHoach) {
+        const keHoachDuyet = {
+            'id': keHoach.id,
+            'idTrangThai': 2
+        };
         this.keHoachService.duyetKeHoach(keHoachDuyet).subscribe(
             value => {
                 if (value['errorCode'] === 0) {
-                    this.keHoachs.forEach(kh => {
-                        if (kh.id === id) {
-                            kh.idTinhTrang = this.idTinhTrang;
-                        }
-                    });
+                    keHoach.trangThai = 'Đã duyệt';
+                    this.sharingService.notifInfo('Duyệt thành công');
                 } else {
-                    alert(value['errorMessage']);
+                    this.sharingService.notifError('Không thê duyệt ' + value['errorMessage']);
                 }
-            },
-            error1 => alert('lỗi')
+            }, error1 => {
+                this.sharingService.notifError('Không thể duyệt kế hoạch');
+            }
         );
     }
 }

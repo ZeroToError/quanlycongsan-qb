@@ -21,7 +21,8 @@ export class HienThiDeXuatComponent implements OnInit {
 
     selectedLoaiDeXuat: number;
     searchFilter = {
-        nam: 0
+        nam: 0,
+        trangThai: ''
     }
   constructor(private libraryService: LibraryService,
               private sharingService: SharingService,
@@ -41,11 +42,15 @@ export class HienThiDeXuatComponent implements OnInit {
   getDeXuats() {
       this.deXuatService.getAll(this.selectedLoaiDeXuat, this.page, this.size).subscribe(
           result => {
-              this.deXuats = result['result']['items'];
-              this.total = result['result']['totals'];
-              this.totalPage =  Math.ceil(this.total / this.size) ;
+              if (+result['errorCode'] === 0) {
+                  this.deXuats = result['result']['items'];
+                  this.total = result['result']['totals'];
+                  this.totalPage =  Math.ceil(this.total / this.size) ;
+              } else {
+                  this.sharingService.notifError('Không thể tải đề xuất: ' + result['errorMessage']);
+              }
           }, error2 => {
-              this.sharingService.notifError('Không thể tải đề xuất: ' + error2['errorMessage']);
+              this.sharingService.notifError('Không thể tải đề xuất');
           }
       );
   }
@@ -83,4 +88,23 @@ export class HienThiDeXuatComponent implements OnInit {
         this.getDeXuats();
     }
 
+    duyetDeXuat(deXuat: DeXuat) {
+        const object = {
+            id: deXuat.id,
+            idTrangThai: 2
+        }
+
+        this.deXuatService.duyet(object).subscribe(
+            result => {
+                if (+result['errorCode'] === 0) {
+                    deXuat.trangThai = 'Đã duyệt';
+                    this.sharingService.notifInfo('Đã duyệt đề xuất thành công');
+                } else {
+                    this.sharingService.notifError('Không thể tải đề xuất: ' + result['errorMessage']);
+                }
+            }, error2 => {
+                this.sharingService.notifError('Không thể tải đề xuất: ' + error2['errorMessage']);
+            }
+        )
+    }
 }

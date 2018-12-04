@@ -8,5 +8,5 @@ export class TaiSan {
     namSuDung: Date;
     tenTaiSan: string;
     thongSoKyThuat: string;
-    soluong: number;
+    soLuong: number;
 }

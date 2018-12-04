@@ -112,7 +112,7 @@ export class SuaTaiSanComponent implements OnInit {
                         this.sharingService.notifError('Sửa tài sản thất bại: ' + result['errorMessage']);
                     }
                 }, error2 => {
-                    this.sharingService.notifError('Sửa tài sản thất bại: ' + error2['errorMessage']);
+                    this.sharingService.notifError('Sửa tài sản thất bại: ');
                 }
             )
         } else {

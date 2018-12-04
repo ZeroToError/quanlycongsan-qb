@@ -100,7 +100,7 @@ export class ThemTaiSanComponent implements OnInit {
                       this.sharingService.notifError('Thêm tài sản thất bại: ' + result['errorMessage']);
                   }
               }, error2 => {
-                  this.sharingService.notifError('Thêm tài sản thất bại: ' + error2['errorMessage']);
+                  this.sharingService.notifError('Thêm tài sản thất bại: ');
               }
           )
       } else {

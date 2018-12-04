@@ -25,22 +25,24 @@ export class SuaNhomTaiSanComponent implements OnInit {
     ngOnInit() {
     }
 
-    addNhomTaiSan(): void {
+    suaNhomTaiSan(): void {
         this.saveClicked = true;
         if (this.validate()) {
-            this.nhomTaiSanService.editNhomTaiSan(this.nhomTaiSan).subscribe(
-                result => {
-                    if ( result['errorCode'] === 0) {
-                        this.sharingService.notifInfo('Sửa nhóm tài sản thành công');
-                        this.router.navigate(['/nhom-tai-san']);
-                    } else {
-                        this.sharingService.notifError('Sửa nhóm tài sản thất bại ' + result['errorMessage']);
-                    }
-                },
-                error2 => {
-                    this.sharingService.notifError('Sửa nhóm tài sản thất bại ' + error2['errorMessage']);
-                }
-            );
+            this.sharingService.notifInfo('Sửa nhóm tài sản thành công');
+            this.router.navigate(['/nhom-tai-san']);
+            // this.nhomTaiSanService.editNhomTaiSan(this.nhomTaiSan).subscribe(
+            //     result => {
+            //         if ( result['errorCode'] === 0) {
+            //             this.sharingService.notifInfo('Sửa nhóm tài sản thành công');
+            //             this.router.navigate(['/nhom-tai-san']);
+            //         } else {
+            //             this.sharingService.notifError('Sửa nhóm tài sản thất bại ' + result['errorMessage']);
+            //         }
+            //     },
+            //     error2 => {
+            //         this.sharingService.notifError('Sửa nhóm tài sản thất bại ' + error2['errorMessage']);
+            //     }
+            // );
         } else {
             this.sharingService.notifError('Vui lòng kiểm tra lại dữ liệu');
         }

@@ -29,7 +29,7 @@ export class ThemNhomTaiSanComponent implements OnInit {
       if (this.validate()) {
           this.nhomTaiSanService.addNhomTaiSan(this.nhomTaiSan).subscribe(
               result => {
-                  if ( result['errorCode'] === 0) {
+                  if (+result['errorCode'] === 0) {
                       this.sharingService.notifInfo('Thêm nhóm tài sản thành công');
                       this.router.navigate(['/nhom-tai-san']);
                   } else {
@@ -37,7 +37,7 @@ export class ThemNhomTaiSanComponent implements OnInit {
                   }
               },
               error2 => {
-                  this.sharingService.notifError('Thêm nhóm tài sản thất bại ' + error2['errorMessage']);
+                  this.sharingService.notifError('Thêm nhóm tài sản thất bại ');
               }
           );
       } else {

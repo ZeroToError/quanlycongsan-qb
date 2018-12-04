@@ -21,4 +21,8 @@ export class DeXuatService {
     add(deXuat: DeXuatV2) {
         return this.http.post(this.deXuatUrl, deXuat, httpOptions);
     }
+
+    duyet(object: any) {
+        return this.http.put(this.deXuatUrl, object, httpOptions);
+    }
 }

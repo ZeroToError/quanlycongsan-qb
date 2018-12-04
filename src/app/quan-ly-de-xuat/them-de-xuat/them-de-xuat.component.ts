@@ -70,7 +70,7 @@ export class ThemDeXuatComponent implements OnInit {
                       this.sharingService.notifError('Không thể thêm đề xuất ' + result['errorMessage']);
                   }
               }, error2 => {
-                  this.sharingService.notifError('Không thể thêm đề xuất ' + error2['errorMessage']);
+                  this.sharingService.notifError('Không thể thêm đề xuất');
               }
           )
       } else {

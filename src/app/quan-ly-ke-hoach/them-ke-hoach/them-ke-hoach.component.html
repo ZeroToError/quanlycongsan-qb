@@ -27,7 +27,7 @@
                                             <button type="button" class="btn btn-primary" tabindex="2">
                                                 <i class="fa fa-upload" aria-hidden="true"></i>
                                             </button>
-                                            <input type="file" class="file fileImg" name="fileBase64" id="FileImg" id-view="imageName" err-idx="0" accept=".jpg,.png,.pdf" (change)="onFileChange($event)">
+                                            <input type="file" class="file fileImg" name="fileBase64" id="FileImg" id-view="imageName" err-idx="0" accept=".pdf" (change)="onFileChange($event)">
                                         </span>
                                     </div>
                                     <p *ngIf="newKeHoach.fileBase64 === '' && saveClicked" class="error">Trường này là bắt buộc</p>

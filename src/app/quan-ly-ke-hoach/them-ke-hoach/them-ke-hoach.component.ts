@@ -59,7 +59,7 @@ export class ThemKeHoachComponent implements OnInit {
             result => {
                 this.donVis = result['result'];
             }, error2 => {
-                alert('Khong the fetch don vi');
+                this.sharingService.notifError('Khong the fetch don vi');
             }
         );
     }
@@ -70,7 +70,7 @@ export class ThemKeHoachComponent implements OnInit {
             result => {
                 this.loaiKeHoachs = result['result'];
             }, error2 => {
-                alert('Khong the fetch loai ke hoach');
+                this.sharingService.notifError('Khong the fetch loai ke hoach');
             }
         );
     }
@@ -87,7 +87,7 @@ export class ThemKeHoachComponent implements OnInit {
                         this.sharingService.notifError('Thêm kế hoạch thất bại: ' + result['errorMessage']);
                     }
                 }, error2 => {
-                    this.sharingService.notifError('Thêm kế hoạch thất bại: ' + error2['errorMessage']);
+                    this.sharingService.notifError('Thêm kế hoạch thất bại');
                 }
             )
         } else {
