@@ -34,7 +34,7 @@ export class ThemTaiSanComponent implements OnInit {
         idLoaiTaiSan: 0,
         idNhomTaiSan: 0,
         idDonViTinh: 0,
-        idPhongBan: 0,
+        idDonVi: 0,
         maTaiSan: '',
         maThietBi: '',
         tenTaiSan: '',
@@ -85,7 +85,7 @@ export class ThemTaiSanComponent implements OnInit {
   }
 
   removeTSCT(i: number) {
-    this.newTaiSan.taiSanCuThe.splice(i - 1, 1);
+    this.newTaiSan.taiSanCuThe.splice(i, 1);
   }
 
     luuTS() {
@@ -155,7 +155,7 @@ export class ThemTaiSanComponent implements OnInit {
 
     validate(): boolean {
         return this.newTaiSan.tenTaiSan !== ''
-            && +this.newTaiSan.idPhongBan !== 0
+            && +this.newTaiSan.idDonVi !== 0
             && +this.newTaiSan.idDonViTinh !== 0
             && +this.newTaiSan.idLoaiTaiSan !== 0
             && +this.newTaiSan.idNhomTaiSan !== 0

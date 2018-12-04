@@ -33,7 +33,7 @@ export class SuaTaiSanComponent implements OnInit {
             idLoaiTaiSan: 0,
             idNhomTaiSan: 0,
             idDonViTinh: 0,
-            idPhongBan: 0,
+            idDonVi: 0,
             maTaiSan: '',
             maThietBi: '',
             tenTaiSan: '',
@@ -63,7 +63,6 @@ export class SuaTaiSanComponent implements OnInit {
       this.taiSanService.getById(id).subscribe(
           result => {
             this.newTaiSan = result['result'];
-            this.selectedDonVi = this.donVis.find(dv => dv.child.find(pb => +pb.id === +this.newTaiSan.idPhongBan) !== undefined);
           }, error2 => {
             this.sharingService.notifError('lỗi: ' + error2['errorMessage']);
           }
@@ -97,7 +96,7 @@ export class SuaTaiSanComponent implements OnInit {
     }
 
     removeTSCT(i: number) {
-        this.newTaiSan.taiSanCuThe.splice(i - 1, 1);
+        this.newTaiSan.taiSanCuThe.splice(i, 1);
     }
 
     luuTS() {
@@ -165,7 +164,7 @@ export class SuaTaiSanComponent implements OnInit {
 
     validate(): boolean {
         return this.newTaiSan.tenTaiSan !== ''
-            && +this.newTaiSan.idPhongBan !== 0
+            && +this.newTaiSan.idDonVi !== 0
             && +this.newTaiSan.idDonViTinh !== 0
             && +this.newTaiSan.idLoaiTaiSan !== 0
             && +this.newTaiSan.idNhomTaiSan !== 0
