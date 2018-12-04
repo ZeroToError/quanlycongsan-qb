@@ -5,7 +5,7 @@ export class TaiSanV2 {
     idLoaiTaiSan: number;
     idNhomTaiSan: number;
     idDonViTinh: number;
-    idPhongBan: number;
+    idDonVi: number;
     maTaiSan: string;
     maThietBi: string;
     tenTaiSan: string;

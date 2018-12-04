@@ -82,6 +82,7 @@
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
+                <th>Đơn vị</th>
                 <th>Mã tài sản</th>
                 <th>Loại tài sản</th>
                 <th>Nhóm tài sản</th>
@@ -94,7 +95,8 @@
                 <th>Hành động</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan}">
+                <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan, tenDonVi: searchFilter.donVi}">
+                  <td>{{taiSan.tenDonVi}}</td>
                   <td>{{taiSan.maTaiSan}}</td>
                   <td>{{taiSan.loaiTaiSan}}</td>
                   <td>{{taiSan.nhomTaiSan}}</td>

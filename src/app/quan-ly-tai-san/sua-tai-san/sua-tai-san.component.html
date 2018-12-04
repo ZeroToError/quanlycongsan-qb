@@ -41,18 +41,11 @@
                 </div>
                 <div class="form-group">
                   <label>Đơn vị</label>
-                  <select class="form-control" name="donVi" (change)="updateSelectedDonVi($event.target.value)" [ngModel]="selectedDonVi.id">
+                  <select class="form-control" name="donVi" [(ngModel)]="newTaiSan.idDonVi">
                     <option value="0">Chọn đơn vị</option>
                     <option *ngFor="let item of donVis" value="{{item.id}}">{{item.ten}}</option>
                   </select>
-                </div>
-                <div class="form-group">
-                  <label>Phòng ban  <span class="error">*</span></label>
-                  <select class="form-control" name="phongBan" [(ngModel)]="newTaiSan.idPhongBan">
-                    <option value="0">Chọn phòng ban</option>
-                    <option *ngFor="let item of selectedDonVi.child" value="{{item.id}}">{{item.ten}}</option>
-                  </select>
-                  <p *ngIf="+newTaiSan.idPhongBan === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
+                  <p *ngIf="+newTaiSan.idDonVi === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
                 </div>
                 <div class="form-group">
                   <label>Đơn vị tính  <span class="error">*</span></label>
