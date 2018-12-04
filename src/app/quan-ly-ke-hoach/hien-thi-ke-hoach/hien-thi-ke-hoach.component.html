@@ -114,8 +114,7 @@
                                 <td>{{keHoach.nam}}</td>
                                 <td>{{keHoach.namHoc}}</td>
                                 <td>
-                                    <button class="btn btn-md btn-primary" [disabled]="keHoach.id == tinhTrang"><i
-                                            class="now-ui-icons travel_info"></i>
+                                    <button class="btn btn-md btn-primary" (click)="duyetKeHoach(keHoach.id)" [disabled]="keHoach.idTinhTrang==2"><i class="now-ui-icons travel_info"></i>
                                     </button>
                                     <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i>
                                     </button>

@@ -18,7 +18,7 @@ export class HienThiKeHoachComponent implements OnInit {
     page: number;
     size: number;
     totalPage: number;
-    tinhTrang: number;
+    idTinhTrang: number;
 
     searchFilter = {
         tenKeHoach: '',
@@ -33,7 +33,7 @@ export class HienThiKeHoachComponent implements OnInit {
         this.page = 0;
         this.size = 10;
         this.totalPage = 0;
-        this.tinhTrang = 2;
+        this.idTinhTrang = 2;
     }
 
     ngOnInit() {
@@ -107,5 +107,23 @@ export class HienThiKeHoachComponent implements OnInit {
     nextPage() {
         this.page++;
         this.getKeHoachs();
+    }
+
+    duyetKeHoach(id: number) {
+        const keHoachDuyet = {'Id': id, 'IdTrangThai': this.idTinhTrang};
+        this.keHoachService.duyetKeHoach(keHoachDuyet).subscribe(
+            value => {
+                if (value['errorCode'] === 0) {
+                    this.keHoachs.forEach(kh => {
+                        if (kh.id === id) {
+                            kh.idTinhTrang = this.idTinhTrang;
+                        }
+                    });
+                } else {
+                    alert(value['errorMessage']);
+                }
+            },
+            error1 => alert('lỗi')
+        );
     }
 }
