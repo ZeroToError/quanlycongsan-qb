@@ -10,27 +10,16 @@
         <div class="card-body">
           <form>
             <div class="row">
-              <div class="col-md-5 pr-1">
-                <div class="form-group">
-                  <label>Tên hoặc mã tài sản</label>
-                  <input type="text" class="form-control" name="tenTaiSan" value="" [(ngModel)]="searchFilter.tenTaiSan">
-                </div>
-              </div>
-            </div>
-            <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Đơn vị</label>
-                  <select class="form-control" name="donVi" (change)="updateSelectedDonVi($event.target.value)">
-                    <option value="">Chọn đơn vị</option>
-                    <option *ngFor="let item of donVis" [value]="item.id">{{item.ten}}</option>
-                  </select>
+                  <label>Tên tài sản</label>
+                  <input type="text" class="form-control" name="tenTaiSan" value="" [(ngModel)]="searchFilter.tenTaiSan">
                 </div>
                 <div class="form-group">
-                  <label>Phòng ban</label>
-                  <select class="form-control" name="phongBan" [(ngModel)]="searchFilter.phongBan">
-                    <option value="">Chọn phòng ban</option>
-                    <option *ngFor="let item of selectedDonVi.child" value="{{item.id}}">{{item.ten}}</option>
+                  <label>Đơn vị</label>
+                  <select class="form-control" name="donVi" [(ngModel)]="searchFilter.donVi">
+                    <option value="">Chọn đơn vị</option>
+                    <option *ngFor="let item of donVis" [value]="item.ten">{{item.ten}}</option>
                   </select>
                 </div>
               </div>
@@ -59,10 +48,7 @@
               <div class="col-md-6"></div>
               <div class="col-md-6 pr-1">
                 <div class="form-group group-function">
-                  <button class="btn btn-md btn-primary">Tìm kiếm</button>
-                  <button class="btn btn-md btn-primary">Sửa theo lô</button>
-                  <button class="btn btn-md btn-primary">In mã tài sản</button>
-                  <button class="btn btn-md btn-primary">Xuất excel</button>
+                  <!--Buttons go here-->
                 </div>
               </div>
             </div>
@@ -80,9 +66,10 @@
               <div class="form-group">
                 <label>Hiển thị</label>
                 <select class="form-control page-link bg-light" style="max-width: 100px" (change)="setItemPerPage($event.target.value)">
-                  <option value=5 [selected]="5 === size">5</option>
-                  <option value=10 [selected]="10 === size">10</option>
-                  <option value=15 [selected]="15 === size">15</option>
+                  <option value="5" [selected]="5 === size">5</option>
+                  <option value="10" [selected]="10 === size">10</option>
+                  <option value="15" [selected]="15 === size">15</option>
+                  <option value="1000000" [selected]="1000000 === size">Tất cả</option>
                 </select>
               </div>
             </div>
@@ -95,6 +82,7 @@
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
+                <th>Đơn vị</th>
                 <th>Mã tài sản</th>
                 <th>Loại tài sản</th>
                 <th>Nhóm tài sản</th>
@@ -104,10 +92,11 @@
                 <th>Tên tài sản</th>
                 <th>Thông số kỹ thuật</th>
                 <th>Số lượng</th>
-                <th>Action</th>
+                <th>Hành động</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan}">
+                <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan, tenDonVi: searchFilter.donVi}">
+                  <td>{{taiSan.tenDonVi}}</td>
                   <td>{{taiSan.maTaiSan}}</td>
                   <td>{{taiSan.loaiTaiSan}}</td>
                   <td>{{taiSan.nhomTaiSan}}</td>
@@ -116,7 +105,7 @@
                   <td>{{taiSan.namSuDung | date}}</td>
                   <td>{{taiSan.tenTaiSan}}</td>
                   <td>{{taiSan.thongSoKyThuat}}</td>
-                  <td>{{taiSan.soluong}}</td>
+                  <td>{{taiSan.soLuong}}</td>
                   <td>
                     <button class="btn btn-md btn-info" routerLink="/tai-san/sua-tai-san/{{taiSan.id}}"><i class="now-ui-icons travel_info"></i></button>
                     <button class="btn btn-md btn-warning"><i class="now-ui-icons ui-1_simple-delete"></i></button>

@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['']);
                     }
                 }, error2 => {
-
+                    this.notifDangNhapThatBai('Đăng nhập không thành công');
                 });
             }
   }

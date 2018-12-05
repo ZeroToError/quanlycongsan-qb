@@ -1,33 +1,43 @@
 <div class="panel-header panel-header-sm">
 </div>
+<div class="main-content" style="margin-top: 50px">
   <div class="row">
     <div class="col-md-12">
       <div class="card card-plain">
         <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 pr-1">
+            </div>
+            <div class="col-md-6 pr-1 flex-column-reverse">
+              <div class="form-group">
+                <button class="btn btn btn-lg btn-success float-right" routerLink="/nhom-tai-san/them-nhom-tai-san">Thêm mới</button>
+              </div>
+            </div>
+          </div>
           <div class="table-responsive">
-            <button class="btn btn-md btn-success" routerLink="/nhom-tai-san/them-nhom-tai-san" >Thêm</button>
             <table class="table">
               <thead class=" text-primary">
-              <th>
-                Mã nhóm tài sản
-              </th>
-              <th>
-                Tên nhóm tài sản
-              </th>
-              <th class="text-right">
-              </th>
+                <th>
+                  Mã nhóm tài sản
+                </th>
+                <th>
+                  Tên nhóm tài sản
+                </th>
+                <th>
+                  Hành động
+                </th>
               </thead>
               <tbody>
-              <tr *ngFor="let taisan of nhomTaiSan">
+              <tr *ngFor="let item of nhomTaiSan">
                 <td>
-                  {{taisan.ma}}
+                  {{item.ma}}
                 </td>
                 <td>
-                  {{taisan.ten}}
+                  {{item.ten}}
                 </td>
                 <td>
-                  <button class="btn btn-md btn-primary" routerLink="/nhom-tai-san/sua-nhom-tai-san"><i class="now-ui-icons travel_info"></i></button>
-                  <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i></button>
+                  <button class="btn btn-md btn-info mr-1"  routerLink="/nhom-tai-san/sua-nhom-tai-san/{{item.id}}"><i class="now-ui-icons travel_info"></i></button>
+                  <button class="btn btn-md btn-warning"><i class="now-ui-icons design_scissors"></i></button>
                 </td>
               </tr>
               </tbody>
@@ -37,6 +47,4 @@
       </div>
     </div>
   </div>
-
-
-
+</div>

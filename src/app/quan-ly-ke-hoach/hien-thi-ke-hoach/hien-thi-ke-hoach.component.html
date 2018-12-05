@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Bộ lọc</h4>
+                    <h4 class="card-title"></h4>
                 </div>
                 <div class="card-body">
                     <form>
@@ -13,7 +13,19 @@
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
                                     <label>Tên kế hoạch</label>
-                                    <input type="text" class="form-control" name="tenKeHoach" [(ngModel)]="searchFilter.tenKeHoach">
+                                    <input type="text" class="form-control" name="tenKeHoach"
+                                           [(ngModel)]="searchFilter.tenKeHoach">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <select class="form-control" name="trangThai" [(ngModel)]="searchFilter.trangThai">
+                                        <option value="">Chọn trạng thái</option>
+                                        <option *ngFor="let item of ['Chưa duyệt', 'Đã duyệt']" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -22,7 +34,7 @@
                                 <div class="form-group">
                                     <label>Đơn vị</label>
                                     <select class="form-control" name="donVi" [(ngModel)]="searchFilter.donVi">
-                                        <option value="">--</option>
+                                        <option value="">Chọn đơn vị</option>
                                         <option *ngFor="let item of donVis" [value]="item.ten">
                                             {{item.ten}}
                                         </option>
@@ -32,8 +44,9 @@
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
                                     <label>Loại kế hoạch</label>
-                                    <select class="form-control" name="loaiKeHoach" [(ngModel)]="searchFilter.loaiKeHoach">
-                                        <option value="">--</option>
+                                    <select class="form-control" name="loaiKeHoach"
+                                            [(ngModel)]="searchFilter.loaiKeHoach">
+                                        <option value="">Chọn kế hoạch</option>
                                         <option *ngFor="let loaiKH of loaiKeHoach" [value]="loaiKH.ten">
                                             {{loaiKH.ten}}
                                         </option>
@@ -45,13 +58,15 @@
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
                                     <label>Năm</label>
-                                    <input type="number" min="1995" max="2095" class="form-control" name="nam" [(ngModel)]="searchFilter.nam">
+                                    <input type="number" min="1995" max="2095" class="form-control" name="nam"
+                                           [(ngModel)]="searchFilter.nam">
                                 </div>
                             </div>
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
                                     <label>Năm học</label>
-                                    <input type="text" class="form-control" name="namHoc" [(ngModel)]="searchFilter.namHoc">
+                                    <input type="text" class="form-control" name="namHoc"
+                                           [(ngModel)]="searchFilter.namHoc">
                                 </div>
                             </div>
                         </div>
@@ -59,9 +74,7 @@
                             <div class="col-md-6"></div>
                             <div class="col-md-6 pr-1">
                                 <div class="form-group group-function text-right">
-                                    <button class="btn btn-md btn-primary" disabled>Tìm kiếm</button>
-                                    <button class="btn btn-md btn-primary" disabled>Tìm kiếm</button>
-                                    <button class="btn btn-md btn-primary" disabled>Tìm kiếm</button>
+                                    <!-- Buttons go here-->
                                 </div>
                             </div>
                         </div>
@@ -80,9 +93,10 @@
                                 <label>Hiển thị</label>
                                 <select class="form-control page-link bg-light" style="max-width: 100px"
                                         (change)="setItemPerPage($event.target.value)">
-                                    <option value=5 [selected]="5 === size">5</option>
-                                    <option value=10 [selected]="10 === size">10</option>
-                                    <option value=15 [selected]="15 === size">15</option>
+                                    <option value="5" [selected]="5 === size">5</option>
+                                    <option value="10" [selected]="10 === size">10</option>
+                                    <option value="15" [selected]="15 === size">15</option>
+                                    <option value="1000000" [selected]="1000000 === size">Tất cả</option>
                                 </select>
                             </div>
                         </div>
@@ -98,26 +112,29 @@
                         <table class="table table-bordered table-hover table-striped">
                             <thead class=" text-primary">
                             <th>Tên kế hoạch</th>
-                            <th>Loại kế hoạch</th>
                             <th>Tên đơn vị</th>
+                            <th>Loại kế hoạch</th>
                             <th>File</th>
                             <th>Năm</th>
                             <th>Năm học</th>
-                            <th>Action</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let keHoach of keHoachs | taisan : {tenKeHoach: searchFilter.tenKeHoach, tenLoaiKeHoach: searchFilter.loaiKeHoach, tenDonVi: searchFilter.donVi, nam: searchFilter.nam, namHoc: searchFilter.namHoc}">
+                            <tr *ngFor="let keHoach of keHoachs | taisan : {tenKeHoach: searchFilter.tenKeHoach, tenLoaiKeHoach: searchFilter.loaiKeHoach, tenDonVi: searchFilter.donVi, nam: searchFilter.nam, namHoc: searchFilter.namHoc, trangThai: searchFilter.trangThai}">
                                 <td>{{keHoach.tenKeHoach}}</td>
-                                <td>{{keHoach.tenLoaiKeHoach}}</td>
                                 <td>{{keHoach.tenDonVi}}</td>
-                                <td><a href="#">{{keHoach.file}}</a></td>
+                                <td>{{keHoach.tenLoaiKeHoach}}</td>
+                                <td><a href="{{keHoach.filePath}}" target="_blank">{{keHoach.filePath === null ? '' : 'Xem file'}}</a></td>
                                 <td>{{keHoach.nam}}</td>
                                 <td>{{keHoach.namHoc}}</td>
+                                <td>{{keHoach.trangThai}}</td>
                                 <td>
-                                    <button class="btn btn-md btn-primary" [disabled]="keHoach.id == tinhTrang"><i
-                                            class="now-ui-icons travel_info"></i>
+                                    <button class="btn btn-md btn-primary" style="font-size: 20px" (click)="duyetKeHoach(keHoach)"
+                                            [disabled]="keHoach.trangThai==='Đã duyệt'" *appAdminContent="true">Duyệt
                                     </button>
-                                    <button class="btn btn-md btn-success"><i class="now-ui-icons design_scissors"></i>
+                                    <button class="btn btn-md btn-info"><i
+                                            class="now-ui-icons travel_info"></i>
                                     </button>
                                     <button class="btn btn-md btn-warning"><i
                                             class="now-ui-icons ui-1_simple-delete"></i></button>

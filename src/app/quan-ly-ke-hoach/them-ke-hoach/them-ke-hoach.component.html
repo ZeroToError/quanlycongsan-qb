@@ -12,57 +12,63 @@
                         <div class="row">
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
-                                    <label>Tên kế hoạch</label>
+                                    <label>Tên kế hoạch<span class="error">*</span></label>
                                     <input type="text" class="form-control" name="tenKeHoach"
                                            [(ngModel)]="newKeHoach.tenKeHoach" required="required">
+                                    <p *ngIf="newKeHoach.tenKeHoach === '' && saveClicked" class="error">Trường này là bắt buộc</p>
                                 </div>
                             </div>
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label>File kế hoạch</label>
+                                    <label>File kế hoạch<span class="error">*</span></label>
                                     <div class="input-group">
                                         <input class="form-control" name="fileName" required="required" [(ngModel)]="newKeHoach.fileName">
                                         <span class="input-group-btn file-area">
                                             <button type="button" class="btn btn-primary" tabindex="2">
                                                 <i class="fa fa-upload" aria-hidden="true"></i>
                                             </button>
-                                            <input type="file" class="file fileImg" name="fileBase64" id="FileImg" id-view="imageName" err-idx="0" accept=".jpg,.png,.pdf" (change)="onFileChange($event)">
+                                            <input type="file" class="file fileImg" name="fileBase64" id="FileImg" id-view="imageName" err-idx="0" accept=".pdf" (change)="onFileChange($event)">
                                         </span>
                                     </div>
+                                    <p *ngIf="newKeHoach.fileBase64 === '' && saveClicked" class="error">Trường này là bắt buộc</p>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
-                                    <label>Đơn vị</label>
+                                    <label>Đơn vị<span class="error">*</span></label>
                                     <select class="form-control" name="donVi" [(ngModel)]="newKeHoach.idDonVi">
                                         <option value="0">Chọn đơn vị</option>
                                         <option *ngFor="let item of donVis" value="{{item.id}}">{{item.ten}}</option>
                                     </select>
+                                    <p *ngIf="+newKeHoach.idDonVi === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
                                 </div>
                             </div>
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label>Loại kế hoạch</label>
+                                    <label>Loại kế hoạch<span class="error">*</span></label>
                                     <select class="form-control" name="loaiKeHoach" [(ngModel)]="newKeHoach.idLoaiKeHoach">
                                         <option value="0">Chọn loại kế hoạch</option>
                                         <option *ngFor="let item of loaiKeHoachs" value="{{item.id}}">{{item.ten}}</option>
                                     </select>
+                                    <p *ngIf="+newKeHoach.idLoaiKeHoach === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
-                                    <label>Năm</label>
+                                    <label>Năm<span class="error">*</span></label>
                                     <input min="1995" max="2095" type="number" class="form-control" name="nam" required="required" [(ngModel)]="newKeHoach.nam">
+                                    <p *ngIf="+newKeHoach.nam === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
                                 </div>
                             </div>
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label>Năm học</label>
+                                    <label>Năm học<span class="error">*</span></label>
                                     <input type="text" class="form-control" name="namHoc" required="required" [(ngModel)]="newKeHoach.namHoc">
+                                    <p *ngIf="newKeHoach.namHoc === '' && saveClicked" class="error">Trường này là bắt buộc</p>
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ import {DonVi} from '../../_models/don-vi';
 import {LoaiKeHoach} from '../../_models/loai-ke-hoach';
 import {LibraryService} from '../../_services/library.service';
 import {SharingService} from '../../_services/sharing.service';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
 
 @Component({
     selector: 'app-them-ke-hoach',
@@ -27,6 +28,8 @@ export class ThemKeHoachComponent implements OnInit {
         nam: new Date().getFullYear(),
         namHoc: ''
     };
+
+    saveClicked = false;
     constructor(private toastr: ToastrService,
                 private keHoachService: KeHoachService,
                 private libraryService: LibraryService,
@@ -56,7 +59,7 @@ export class ThemKeHoachComponent implements OnInit {
             result => {
                 this.donVis = result['result'];
             }, error2 => {
-                alert('Khong the fetch don vi');
+                this.sharingService.notifError('Khong the fetch don vi');
             }
         );
     }
@@ -67,23 +70,38 @@ export class ThemKeHoachComponent implements OnInit {
             result => {
                 this.loaiKeHoachs = result['result'];
             }, error2 => {
-                alert('Khong the fetch loai ke hoach');
+                this.sharingService.notifError('Khong the fetch loai ke hoach');
             }
         );
     }
 
 
     themKeHoach() {
-        this.keHoachService.add(this.newKeHoach).subscribe(
-            result => {
-                if (+result['errorCode'] === 0) {
-                    this.sharingService.notifInfo('Thêm kế hoạch thành công!');
-                } else {
-                    this.sharingService.notifError('Thêm kế hoạch thất bại: ' + result['errorMessage']);
+        this.saveClicked = true;
+        if (this.validate()) {
+            this.keHoachService.add(this.newKeHoach).subscribe(
+                result => {
+                    if (+result['errorCode'] === 0) {
+                        this.sharingService.notifInfo('Thêm kế hoạch thành công!');
+                    } else {
+                        this.sharingService.notifError('Thêm kế hoạch thất bại: ' + result['errorMessage']);
+                    }
+                }, error2 => {
+                    this.sharingService.notifError('Thêm kế hoạch thất bại');
                 }
-            }, error2 => {
-                this.sharingService.notifError('Thêm kế hoạch thất bại: ' + error2['errorMessage']);
-            }
-        )
+            )
+        } else {
+            this.sharingService.notifError('Vui lòng kiểm tra lại dữ liệu');
+        }
+    }
+
+    validate(): boolean {
+        return this.newKeHoach.tenKeHoach !== ''
+            && +this.newKeHoach.idDonVi !== 0
+            && +this.newKeHoach.idLoaiKeHoach !== 0
+            && this.newKeHoach.fileName !== ''
+            && this.newKeHoach.fileBase64 !== ''
+            && this.newKeHoach.nam !== 0
+            && this.newKeHoach.namHoc !== ''
     }
 }

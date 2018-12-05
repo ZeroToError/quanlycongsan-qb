@@ -1,0 +1,23 @@
+tr:nth-child(2n + 1) {
+  background: white;
+}
+
+.now-ui-icons {
+  font-size: 22px;
+}
+
+
+.pag-active {
+  color: white;
+  background: lightblue;
+}
+
+.pag-disable {
+  color: white;
+  background: lightgray;
+}
+
+.div-add {
+  display: flex;
+  flex-flow: column-reverse;
+}

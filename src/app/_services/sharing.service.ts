@@ -13,7 +13,7 @@ export class SharingService {
     notifInfo(message: string) {
         this.toastr.clear();
         this.toastr.info(`<span class="now-ui-icons ui-1_bell-53"></span> ${message}`, '', {
-            timeOut: 4000,
+            timeOut: 5000,
             closeButton: true,
             enableHtml: true,
             toastClass: 'alert alert-success alert-with-icon',
@@ -24,7 +24,7 @@ export class SharingService {
     notifError(message: string) {
         this.toastr.clear();
         this.toastr.info(`<span class="now-ui-icons ui-1_bell-53"></span> ${message}`, '', {
-            timeOut: 4000,
+            timeOut: 5000,
             closeButton: true,
             enableHtml: true,
             toastClass: 'alert alert-warning alert-with-icon',

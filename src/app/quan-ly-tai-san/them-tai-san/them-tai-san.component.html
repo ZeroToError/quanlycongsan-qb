@@ -41,18 +41,11 @@
                 </div>
                 <div class="form-group">
                   <label>Đơn vị</label>
-                  <select class="form-control" name="donVi" (change)="updateSelectedDonVi($event.target.value)">
+                  <select class="form-control" name="donVi" [(ngModel)]="newTaiSan.idDonVi">
                     <option value="0">Chọn đơn vị</option>
                     <option *ngFor="let item of donVis" value="{{item.id}}">{{item.ten}}</option>
                   </select>
-                </div>
-                <div class="form-group">
-                  <label>Phòng ban  <span class="error">*</span></label>
-                  <select class="form-control" name="phongBan" [(ngModel)]="newTaiSan.idPhongBan">
-                    <option value="0">Chọn phòng ban</option>
-                    <option *ngFor="let item of selectedDonVi.child" value="{{item.id}}">{{item.ten}}</option>
-                  </select>
-                  <p *ngIf="+newTaiSan.idPhongBan === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
+                  <p *ngIf="+newTaiSan.idDonVi === 0 && saveClicked" class="error">Trường này là bắt buộc</p>
                 </div>
                 <div class="form-group">
                   <label>Đơn vị tính  <span class="error">*</span></label>
@@ -82,7 +75,8 @@
                 </div>
                 <div class="form-group">
                   <label>Năm sử dụng  <span class="error">*</span></label>
-                  <input type="date" name="namSuDung" class="form-control" [(ngModel)]="newTaiSan.namSuDung">
+                  <input type="date" name="namSuDung" class="form-control" [ngModel]="newTaiSan.namSuDung | date:'yyyy-MM-dd'" (ngModelChange)="newTaiSan.namSuDung = $event">
+                  <p *ngIf="newTaiSan.namSuDung.toString() === '' && saveClicked" class="error">Trường này là bắt buộc</p>
                 </div>
                 <div class="form-group">
                   <label>Thông số kỹ thuật  <span class="error">*</span></label>
@@ -136,7 +130,7 @@
                 <td><input type="text" name="maTaiSan{{i+1}}" [(ngModel)]="item.maTaiSan"></td>
                 <td><input type="text" name="maThietBi{{i+1}}" [(ngModel)]="item.maThietBi"></td>
                 <td><input type="text" name="tenTaiSan{{i+1}}" [(ngModel)]="item.tenTaiSan"></td>
-                <td><input type="date" name="namSuDung{{i+1}}" [(ngModel)]="item.namSuDung"></td>
+                <td><input type="date" name="namSuDung{{i+1}}" [ngModel]="item.namSuDung | date:'yyyy-MM-dd'" (ngModelChange)="item.namSuDung = $event"></td>
                 <td><textarea name="thongSoKyThuat{{i+1}}" [(ngModel)]="item.thongSoKyThuat"></textarea></td>
                 <td><input type="number" name="tiLeChatLuong{{i+1}}" [(ngModel)]="item.tyLeChatLuong"></td>
                 <td>

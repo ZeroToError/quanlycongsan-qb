@@ -1,9 +1,13 @@
 export class DeXuat {
-    loaiDeXuat: String;
-    tenPhongBan: String;
-    tenDeXuat: String;
+    id: number;
+    loaiDeXuat: string;
+    tenDonVi: string;
+    tenDeXuat: string;
     nam: number;
-    lyDo: String;
-    ngayHoanThanh: Date;
-    trangThai: number;
+    namHoc: string;
+    lyDo: string;
+    thoiGianHoanThanh: Date;
+    trangThai: string;
+    noiDung: string;
+
 }
