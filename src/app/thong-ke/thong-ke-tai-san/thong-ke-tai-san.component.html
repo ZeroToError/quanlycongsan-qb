@@ -12,7 +12,7 @@
             <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Tên hoặc mã tài sản</label>
+                  <label>Tên tài sản</label>
                   <input type="text" class="form-control" name="tenTaiSan" value="" [(ngModel)]="searchFilter.tenTaiSan">
                 </div>
                 <div class="form-group">
@@ -75,13 +75,14 @@
             </div>
             <div class="col-md-6 pr-1 flex-column-reverse">
               <div class="form-group">
-                <button class="btn btn btn-lg btn-success float-right" routerLink="/tai-san/them-tai-san">Thêm mới</button>
+                <button class="btn btn btn-lg btn-success float-right" (click)="exportAsXLSX()">Export Excel</button>
               </div>
             </div>
           </div>
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
+              <th>Đơn vị</th>
               <th>Mã tài sản</th>
               <th>Loại tài sản</th>
               <th>Nhóm tài sản</th>
@@ -94,7 +95,8 @@
               <th>Hành động</th>
               </thead>
               <tbody>
-              <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan}">
+              <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan, tenDonVi: searchFilter.donVi}">
+                <td>{{taiSan.tenDonVi}}</td>
                 <td>{{taiSan.maTaiSan}}</td>
                 <td>{{taiSan.loaiTaiSan}}</td>
                 <td>{{taiSan.nhomTaiSan}}</td>

@@ -6,6 +6,7 @@ import {TaiSanService} from '../../_services/tai-san.service';
 import {LibraryService} from '../../_services/library.service';
 import {SharingService} from '../../_services/sharing.service';
 import {TaiSan} from '../../_models/tai-san';
+import {ExcelService} from '../../_services/excel.service';
 
 @Component({
   selector: 'app-thong-ke-tai-san',
@@ -31,7 +32,8 @@ export class ThongKeTaiSanComponent implements OnInit {
     };
     constructor(private taiSanService: TaiSanService,
                 private libraryService: LibraryService,
-                private sharingService: SharingService) {
+                private sharingService: SharingService,
+                private excelService: ExcelService) {
         this.taiSans = [];
         this.total = 0;
         this.page = 0;
@@ -108,7 +110,7 @@ export class ThongKeTaiSanComponent implements OnInit {
                     this.total = result['result']['totals'];
                     this.totalPage =  Math.ceil(this.total / this.size) ;
                 } else {
-                    this.sharingService.notifError('Không thể load tài sản ' + result['errorMessage']);
+                    this.sharingService.notifError('Không thể load tài sản');
                 }
             }, error2 => {
                 this.sharingService.notifError('Không thể load tài sản');
@@ -133,6 +135,10 @@ export class ThongKeTaiSanComponent implements OnInit {
     nextPage() {
         this.page++;
         this.getTaiSans();
+    }
+
+    exportAsXLSX(): void {
+        this.excelService.exportAsExcelFile(this.taiSans, 'TKTS');
     }
 }
 
