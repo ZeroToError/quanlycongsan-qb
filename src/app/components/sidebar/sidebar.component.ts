@@ -95,7 +95,7 @@ export const ROUTES: RouteInfo[] = [
         child: []
     },
     {
-        path: '/thong-ke',
+        path: '/thong-ke-tai-san',
         title: 'Thống kê tài sản',
         icon: 'business_money-coins',
         class: '',

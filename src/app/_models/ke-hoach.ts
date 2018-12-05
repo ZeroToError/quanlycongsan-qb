@@ -3,7 +3,8 @@ export class KeHoach {
     tenKeHoach: string;
     tenDonVi: string;
     tenLoaiKeHoach: string;
-    file: string;
+    filePath: string;
     nam: number;
     namHoc: string;
+    trangThai: string;
 }

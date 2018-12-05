@@ -12,7 +12,13 @@
             <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Tên tài sản</label>
+<<<<<<< HEAD
+                  <label>Phòng ban</label>
+                  <select class="form-control" name="phongBan">
+                    <option value="">Chọn phòng ban</option>
+                    <option *ngFor="let item of selectedPhongBan" value="{{item.id}}">{{item.ten}}</option>
+=======
+                  <label>Tên hoặc mã tài sản</label>
                   <input type="text" class="form-control" name="tenTaiSan" value="" [(ngModel)]="searchFilter.tenTaiSan">
                 </div>
                 <div class="form-group">
@@ -20,6 +26,7 @@
                   <select class="form-control" name="donVi" [(ngModel)]="searchFilter.donVi">
                     <option value="">Chọn đơn vị</option>
                     <option *ngFor="let item of donVis" [value]="item.ten">{{item.ten}}</option>
+>>>>>>> d06c2875b07a36d650c17d4fbc2799c47d01a5bd
                   </select>
                 </div>
               </div>
@@ -82,35 +89,33 @@
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
-                <th>Đơn vị</th>
-                <th>Mã tài sản</th>
-                <th>Loại tài sản</th>
-                <th>Nhóm tài sản</th>
-                <th>Đơn vị tính</th>
-                <th>Mã thiết bị</th>
-                <th>Năm sử dụng</th>
-                <th>Tên tài sản</th>
-                <th>Thông số kỹ thuật</th>
-                <th>Số lượng</th>
-                <th>Hành động</th>
+              <th>Mã tài sản</th>
+              <th>Loại tài sản</th>
+              <th>Nhóm tài sản</th>
+              <th>Đơn vị tính</th>
+              <th>Mã thiết bị</th>
+              <th>Năm sử dụng</th>
+              <th>Tên tài sản</th>
+              <th>Thông số kỹ thuật</th>
+              <th>Số lượng</th>
+              <th>Hành động</th>
               </thead>
               <tbody>
-                <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan, tenDonVi: searchFilter.donVi}">
-                  <td>{{taiSan.tenDonVi}}</td>
-                  <td>{{taiSan.maTaiSan}}</td>
-                  <td>{{taiSan.loaiTaiSan}}</td>
-                  <td>{{taiSan.nhomTaiSan}}</td>
-                  <td>{{taiSan.donViTinh}}</td>
-                  <td>{{taiSan.maThietBi}}</td>
-                  <td>{{taiSan.namSuDung | date}}</td>
-                  <td>{{taiSan.tenTaiSan}}</td>
-                  <td>{{taiSan.thongSoKyThuat}}</td>
-                  <td>{{taiSan.soLuong}}</td>
-                  <td>
-                    <button class="btn btn-md btn-info" routerLink="/tai-san/sua-tai-san/{{taiSan.id}}"><i class="now-ui-icons travel_info"></i></button>
-                    <button class="btn btn-md btn-warning"><i class="now-ui-icons ui-1_simple-delete"></i></button>
-                  </td>
-                </tr>
+              <tr *ngFor="let taiSan of taiSans | taisan: {loaiTaiSan: searchFilter.loaiTaiSan}">
+                <td>{{taiSan.maTaiSan}}</td>
+                <td>{{taiSan.loaiTaiSan}}</td>
+                <td>{{taiSan.nhomTaiSan}}</td>
+                <td>{{taiSan.donViTinh}}</td>
+                <td>{{taiSan.maThietBi}}</td>
+                <td>{{taiSan.namSuDung | date}}</td>
+                <td>{{taiSan.tenTaiSan}}</td>
+                <td>{{taiSan.thongSoKyThuat}}</td>
+                <td>{{taiSan.soLuong}}</td>
+                <td>
+                  <button class="btn btn-md btn-info" routerLink="/tai-san/sua-tai-san/{{taiSan.id}}"><i class="now-ui-icons travel_info"></i></button>
+                  <button class="btn btn-md btn-warning"><i class="now-ui-icons ui-1_simple-delete"></i></button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>

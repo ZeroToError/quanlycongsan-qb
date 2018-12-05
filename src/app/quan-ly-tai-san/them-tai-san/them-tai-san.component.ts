@@ -5,6 +5,11 @@ import {NhomTaiSan} from '../../_models/nhom-tai-san';
 import {DonViTinh} from '../../_models/don-vi-tinh';
 import {PhongBan} from '../../_models/phong-ban';
 import {DonVi} from '../../_models/don-vi';
+import {TaiSanService} from '../../_services/tai-san.service';
+import {LibraryService} from '../../_services/library.service';
+import {SharingService} from '../../_services/sharing.service';
+import {TaiSanCuThe} from '../../_models/tai-san-cu-the';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-them-tai-san',
@@ -17,115 +22,158 @@ export class ThemTaiSanComponent implements OnInit {
   loaiTaiSans: LoaiTaiSan[] = [];
   nhomTaiSans: NhomTaiSan[] = [];
   donViTinhs: DonViTinh[] = [];
-  phongBans: PhongBan[] = [];
-
-  constructor() {
-    this.newTaiSan = new TaiSanV2();
-    this.newTaiSan.TaiSanCuThe = [];
+  donVis: DonVi[] = [];
+  selectedDonVi: DonVi;
+    saveClicked = false;
+    constructor(private taiSanService: TaiSanService,
+                private libraryService: LibraryService,
+                private sharingService: SharingService,
+                private router: Router) {
+    this.newTaiSan = {
+        id: 0,
+        idLoaiTaiSan: 0,
+        idNhomTaiSan: 0,
+        idDonViTinh: 0,
+        idDonVi: 0,
+        maTaiSan: '',
+        maThietBi: '',
+        tenTaiSan: '',
+        namSuDung: new Date(),
+        thongSoKyThuat: '',
+        taiSanCuThe: []
+    }
+    this.selectedDonVi = new DonVi();
   }
 
   ngOnInit() {
-    this.loaiTaiSans = [
-        {
-            id: 1,
-            ten: 'Tài sản cố định',
-            ma: '',
-            child: []
-        },
-        {
-            id: 2,
-            ten: 'Thiết bị thực hành',
-            ma: '',
-            child: []
-        }
-    ];
-      this.nhomTaiSans = [
-          {
-              id: 1,
-              ten: 'CPU',
-              ma: 'ABC',
-              child: []
-          },
-          {
-              id: 2,
-              ten: 'Màn hình',
-              ma: 'XYZ',
-              child: []
-          },
-          {
-              id: 3,
-              ten: 'Bàn ghế',
-              ma: 'GHI',
-              child: []
-          }
-      ];
-      this.phongBans = [
-          {
-              id: 1,
-              ten: 'Kho',
-              ma: '',
-              child: []
-          },
-          {
-              id: 2,
-              ten: 'BQL dự án',
-              ma: '',
-              child: []
-          },
-          {
-              id: 3,
-              ten: 'Phòng tổ chức, hành chính',
-              ma: '',
-              child: []
-          }
-      ];
-      this.donViTinhs = [
-          {
-              id: 1,
-              ten: 'Chiếc',
-              ma: '',
-              child: []
-          },
-          {
-              id: 2,
-              ten: 'Chai',
-              ma: '',
-              child: []
-          },
-          {
-              id: 3,
-              ten: 'Bộ',
-              ma: '',
-              child: []
-          }
-      ];
+        this.initOnLocal();
   }
 
-  addTaiSanCuThe(soluong: number) {
-      this.newTaiSan.TaiSanCuThe = [];
-    for (let i = 1; i <= soluong; i++) {
-      this.newTaiSan.TaiSanCuThe.push(
-          {
-              Id: 0,
-              IdTaiSan: this.newTaiSan.Id,
-              MaTaiSan: '',
-              MaThietBi: '',
-              TenTaiSan: this.newTaiSan.TenTaiSan,
-              NamSuDung: this.newTaiSan.NamSuDung,
-              ThongSoKyThuat: '',
-              TyLeChatLuong: 0,
-              TinhTrang: 0,
-              GhiChu: ''
-          }
-      )
+
+    initOnLocal() {
+        this.getNhomTaiSans();
+        this.getLoaiTaiSans();
+        this.getDonViTinhs();
+        this.getDonVisVaPhongBans();
     }
+
+
+  addTaiSanCuThe(soluong: number) {
+      const length = this.newTaiSan.taiSanCuThe.length;
+      if (soluong === 0) {
+          this.newTaiSan.taiSanCuThe = [];
+      } else if (soluong < length) {
+          this.newTaiSan.taiSanCuThe.splice(soluong, length - soluong);
+      } else if (soluong > length) {
+          for (let i = 1; i <= soluong - length; i++) {
+              this.newTaiSan.taiSanCuThe.push(
+                  {
+                      id: 0,
+                      idTaiSan: this.newTaiSan.id,
+                      maTaiSan: '',
+                      maThietBi: '',
+                      tenTaiSan: this.newTaiSan.tenTaiSan,
+                      namSuDung: this.newTaiSan.namSuDung,
+                      thongSoKyThuat: '',
+                      tyLeChatLuong: 0,
+                      tinhTrang: 0,
+                      ghiChu: ''
+                  }
+              )
+          }
+      }
   }
 
   removeTSCT(i: number) {
-    this.newTaiSan.TaiSanCuThe.splice(i - 1, 1);
+    this.newTaiSan.taiSanCuThe.splice(i, 1);
   }
 
     luuTS() {
-      console.log('taisan: ', this.newTaiSan);
+        this.saveClicked = true;
+      if (this.validate()) {
+          this.taiSanService.add(this.newTaiSan).subscribe(
+              result => {
+                  if (+result['errorCode'] === 0) {
+                      this.sharingService.notifInfo('Thêm tài sản thành công');
+                      this.router.navigate(['/tai-san']);
+                  } else {
+                      this.sharingService.notifError('Thêm tài sản thất bại: ' + result['errorMessage']);
+                  }
+              }, error2 => {
+                  this.sharingService.notifError('Thêm tài sản thất bại: ');
+              }
+          )
+      } else {
+          this.sharingService.notifError('Vui lòng xem lại dữ liệu!');
+      }
+    }
+
+    getNhomTaiSans() {
+        this.libraryService.getNhomTaiSans().subscribe(
+            result => {
+                this.nhomTaiSans = result['result'];
+            }, error2 => {
+                this.sharingService.notifError('Khong the fetch nhom tai san');
+            }
+        );
+    }
+
+    getLoaiTaiSans() {
+        this.libraryService.getLoaiTaiSans().subscribe(
+            result => {
+                this.loaiTaiSans = result['result'];
+            }, error2 => {
+                this.sharingService.notifError('Khong the fetch loai tai san');
+            }
+        );
+    }
+
+    getDonViTinhs() {
+        this.libraryService.getDonViTinhs().subscribe(
+            result => {
+                this.donViTinhs = result['result'];
+            }, error2 => {
+                this.sharingService.notifError('Khong the fetch don vi tinh');
+            }
+        );
+    }
+
+    getDonVisVaPhongBans() {
+        this.libraryService.getDonVisVaPhongBans().subscribe(
+            result => {
+                this.donVis = result['result'];
+                this.selectedDonVi = this.donVis[0];
+            }, error2 => {
+                this.sharingService.notifError('Khong the fetch don vi tinh');
+            }
+        );
+    }
+
+    updateSelectedDonVi(idDonVi: number) {
+        this.selectedDonVi = this.donVis.find(dv => +dv.id === +idDonVi);
+    }
+
+    validate(): boolean {
+        return this.newTaiSan.tenTaiSan !== ''
+            && +this.newTaiSan.idDonVi !== 0
+            && +this.newTaiSan.idDonViTinh !== 0
+            && +this.newTaiSan.idLoaiTaiSan !== 0
+            && +this.newTaiSan.idNhomTaiSan !== 0
+            && this.newTaiSan.maTaiSan !== ''
+            && this.newTaiSan.maThietBi !== ''
+            && this.newTaiSan.namSuDung.toString() !== ''
+            && this.validateTaiSanCuThe();
+    }
+
+    validateTaiSanCuThe() {
+        for (const item of this.newTaiSan.taiSanCuThe) {
+            if (item.maTaiSan === ''
+                || item.maThietBi === ''
+                || item.thongSoKyThuat === ''
+                || item.namSuDung.toString() === '') {
+                return false;
+            }
+        }
+        return true;
     }
 }

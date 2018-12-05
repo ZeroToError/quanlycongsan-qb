@@ -1,83 +1,28 @@
 import {Injectable} from '@angular/core';
 import {KeHoach} from '../_models/ke-hoach';
 import {Observable, of} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {API_URL, httpOptions} from '../_constants/constants';
 
 @Injectable({
     providedIn: 'root'
 })
 export class KeHoachService {
-    keHoach: KeHoach[];
+    private keHoachUrl = API_URL + '/kehoachs';
 
-    constructor() {
-        this.keHoach = [];
-        this.keHoach = [
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            },
-            {
-                id: 1,
-                file: 'abc/xyz.scv',
-                nam: 2018,
-                namHoc: '2018-2019',
-                tenDonVi: 'Khoa CNTT',
-                tenKeHoach: 'Kế hoạch nâng cấp phòng máy',
-                tenLoaiKeHoach: 'Kế hoạch mới'
-            }
-        ];
+    constructor(private http: HttpClient) {
     }
 
-    getAll(): Observable<KeHoach[]> {
-        return of(this.keHoach);
+    getAllFromApi(page: number, size: number): Observable<any> {
+        const url = `${this.keHoachUrl}/?offset=${page}&limit=${size}`;
+        return this.http.get(url);
+    }
+
+    add(newKeHoach: any): Observable<any> {
+        return this.http.post(this.keHoachUrl, newKeHoach, httpOptions);
+    }
+
+    duyetKeHoach(keHoach: any): Observable<any> {
+        return this.http.put(`${this.keHoachUrl}`, keHoach, httpOptions);
     }
 }
