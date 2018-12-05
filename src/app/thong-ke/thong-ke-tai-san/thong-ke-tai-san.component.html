@@ -13,9 +13,9 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>Phòng ban</label>
-                  <select class="form-control" name="phongBan" [(ngModel)]="searchFilter.phongBan">
+                  <select class="form-control" name="phongBan">
                     <option value="">Chọn phòng ban</option>
-                    <option *ngFor="let item of selectedDonVi.child" value="{{item.id}}">{{item.ten}}</option>
+                    <option *ngFor="let item of selectedPhongBan" value="{{item.id}}">{{item.ten}}</option>
                   </select>
                 </div>
               </div>
@@ -78,7 +78,7 @@
               <th>Action</th>
               </thead>
               <tbody>
-              <tr *ngFor="let taiSan of taiSans | taisan: {tenTaiSan: searchFilter.tenTaiSan, loaiTaiSan: searchFilter.loaiTaiSan, nhomTaiSan: searchFilter.nhomTaiSan}">
+              <tr *ngFor="let taiSan of taiSans | taisan: {loaiTaiSan: searchFilter.loaiTaiSan}">
                 <td>{{taiSan.maTaiSan}}</td>
                 <td>{{taiSan.loaiTaiSan}}</td>
                 <td>{{taiSan.nhomTaiSan}}</td>
