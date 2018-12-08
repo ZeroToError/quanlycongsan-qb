@@ -5,6 +5,7 @@ import {LibraryService} from '../../_services/library.service';
 import {LoaiKeHoach} from '../../_models/loai-ke-hoach';
 import {DonVi} from '../../_models/don-vi';
 import {SharingService} from '../../_services/sharing.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-hien-thi-ke-hoach',
@@ -32,7 +33,8 @@ export class HienThiKeHoachComponent implements OnInit {
 
     constructor(private keHoachService: KeHoachService,
                 private libraryService: LibraryService,
-                private sharingService: SharingService) {
+                private sharingService: SharingService,
+                private santilizer: DomSanitizer) {
         this.total = 0;
         this.page = 0;
         this.size = 10;
@@ -118,5 +120,9 @@ export class HienThiKeHoachComponent implements OnInit {
 
     random(): boolean {
         return Math.random() > 0.5;
+    }
+
+    safeUrl(url: string) {
+        return this.santilizer.bypassSecurityTrustResourceUrl(url);
     }
 }

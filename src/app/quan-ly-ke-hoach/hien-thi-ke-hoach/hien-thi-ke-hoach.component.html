@@ -125,7 +125,7 @@
                                 <td>{{keHoach.tenKeHoach}}</td>
                                 <td>{{keHoach.tenDonVi}}</td>
                                 <td>{{keHoach.tenLoaiKeHoach}}</td>
-                                <td><a href="{{keHoach.filePath===null?'':(random()? 'assets/pdf/Reality.pdf':'assets/pdf/abc.png')}}" target="_blank">{{keHoach.filePath === null ? '' : 'Xem file'}}</a></td>
+                                <td><a [href]="safeUrl('http://' + keHoach.filePath)" target="_blank">{{keHoach.filePath === null ? '' : 'Xem file'}}</a></td>
                                 <td>{{keHoach.nam}}</td>
                                 <td>{{keHoach.namHoc}}</td>
                                 <td>{{keHoach.trangThai}}</td>
